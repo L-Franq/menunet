@@ -1,0 +1,61 @@
+:root {
+  --bg: #;
+  --tx: #;
+  --ef: #;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+}
+
+div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100vh;
+  margin: 120px 10px 10px 10px;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 25px;
+  padding: 40px;
+  border: 2px solid #888;
+  border-radius: 5px;
+  height: 75%;
+}
+
+input {
+  padding: 8px;
+  margin: 8px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  outline: none;
+  width: 220px;
+}
+
+button {
+  padding: 8px;
+  margin: 25px 8px 8px 8px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background-color: none;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+button:hover{
+    transform: scale(1.1);
+}

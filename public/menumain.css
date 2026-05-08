@@ -1,0 +1,161 @@
+:root {
+  --bg: #f4f9f9;
+  --tx: #035373;
+  --ef: #04bfbf;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--tx);
+  line-height: 1.6;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+  background-color: var(--tx);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#logo img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid var(--ef);
+  transition: transform 0.3s ease;
+}
+
+#logo img:hover {
+  transform: scale(1.05);
+}
+
+/* Estilização dos Filtros */
+#filterer {
+  max-width: 1200px;
+  margin: 40px auto 20px;
+  padding: 0 20px;
+}
+
+#filtros {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+select {
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 2px solid var(--ef);
+  background: white;
+  color: var(--tx);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s;
+}
+
+select:focus {
+  background-color: var(--ef);
+  color: white;
+}
+
+/* Grid de Produtos (Grouper) */
+#grouper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 40px 20px;
+}
+
+/* Card Individual */
+.card-item {
+  background: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+
+  transform: scale(1); 
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              box-shadow 0.4s ease, 
+              border-color 0.4s ease;
+  
+  text-align: center;
+  border-bottom: 5px solid transparent;
+  will-change: transform;
+}
+
+.card-item:hover {
+  transform: scale(1.04); 
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  border-color: var(--ef);
+  cursor: pointer;
+}
+
+.card-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-info {
+  padding: 20px;
+}
+
+.card-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--tx);
+}
+
+.price {
+  display: inline-block;
+  background: var(--ef);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+/* Footer */
+footer {
+  background: #e0f2f2;
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+footer p {
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+footer a {
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 600;
+  color: var(--tx);
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: var(--ef);
+}
+
+@media (max-width: 600px) {
+  #grouper {
+    grid-template-columns: 1fr;
+  }
+}

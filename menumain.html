@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="/public/img/icon/icon.png"
+      type="image/x-icon"
+    />
+
+    <link rel="stylesheet" href="/public/vendor/animate.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/public/menumain.css" />
+    <title>MenuNet | Cardápio Digital</title>
+  </head>
+  <body>
+    <header class="animate__animated animate__fadeInDown">
+      <div id="logo">
+        <img src="/public/img/Logo.png" alt="logo" />
+      </div>
+    </header>
+
+    <main>
+      <section id="filterer">
+        <div id="filtros" class="animate__animated animate__fadeIn">
+          <select name="tipo" id="filtroTipo">
+            <option disabled selected value="">Filtrar por tipo</option>
+            <option value="comidos">Comidas</option>
+            <option value="bebidos">Bebidas</option>
+          </select>
+          <select name="preco" id="filtroPreco">
+            <option disabled selected value="">Filtrar por preço</option>
+            <option value="ate-5000">Até 5.000kz</option>
+            <option value="5000-10000">5.000kz - 10.000kz</option>
+            <option value="acima-10000">Acima de 10.000kz</option>
+          </select>
+        </div>
+      </section>
+
+      <div id="grouper">
+        <div class="card-item animate__animated animate__zoomIn">
+          <img src="/public/img/Logo.png" alt="Calulú" />
+          <div class="card-info">
+            <h3>Calulú de Peixe</h3>
+            <p class="price">4.500kz</p>
+          </div>
+        </div>
+
+        <div
+          class="card-item animate__animated animate__zoomIn"
+          style="animation-delay: 0.1s"
+        >
+          <img src="/public/img/Logo.png" alt="Calulú" />
+          <div class="card-info">
+            <h3>Mufete</h3>
+            <p class="price">6.000kz</p>
+          </div>
+        </div>
+
+        <div
+          class="card-item animate__animated animate__zoomIn"
+          style="animation-delay: 0.2s"
+        >
+          <img src="/public/img/Logo.png" alt="Calulú" />
+          <div class="card-info">
+            <h3>Ginguinga</h3>
+            <p class="price">3.500kz</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="animate__animated animate__fadeInUp">
+      <p>
+        &copy; 2026 Todos os direitos reservados | Criado por
+        <strong>Lopo Franqueira</strong>
+      </p>
+      <div class="social-links">
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Facebook</a>
+        <a href="#">GitHub</a>
+      </div>
+    </footer>
+  </body>
+</html>
