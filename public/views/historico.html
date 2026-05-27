@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../historico.css">
+    <link rel="stylesheet" href="../vendor/animate.css">
+    <link rel="stylesheet" href="../vendor/fontawesome-free-7.2.0-web/css/all.css">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="../img/icon/icon.png" type="image/x-icon">
+    <title>MenuNet | Historico</title>
+</head>
+<body>
+    <main>
+    <header class="header-dash animate__animated animate__fadeIn">
+        <div>
+            <h1>Histórico de Pratos</h1>
+            <p>Itens servidos anteriormente. Você pode republicá-los para o menu de hoje.</p>
+        </div>
+        <span id="voltar" class="voltar-btn">Voltar</span>
+    </header>
+
+    <div class="history-grid animate__animated animate__fadeInUp">
+        
+        <div class="history-card">
+            <img src="../img/tipico4.jpg" alt="Prato">
+            <div class="history-info">
+                <h4>Mufete Especial</h4>
+                <p>Última vez: Ontem</p>
+                <span class="status-tag">Arquivado</span>
+            </div>
+            <div class="history-actions">
+                <button class="btn-action btn-republish">REPUBLICAR&nbsp;<i class="fa-solid fa-rotate"></i></button>
+                <button class="btn-action btn-delete">ELIMINAR&nbsp;<i class="fa-regular fa-trash-can"></i></button>
+            </div>
+        </div>
+
+        <div class="history-card">
+            <img src="../img/tipicos2.jpg" alt="Prato">
+            <div class="history-info">
+                <h4>Feijoada de Choco</h4>
+                <p>Última vez: 08/05/2026</p>
+                <span class="status-tag">Arquivado</span>
+            </div>
+            <div class="history-actions">
+                <button class="btn-action btn-republish">REPUBLICAR</button>
+                <button class="btn-action btn-delete">ELIMINAR</button>
+            </div>
+        </div>
+
+        <div class="history-card">
+            <img src="../img/tipico4.jpg" alt="Prato">
+            <div class="history-info">
+                <h4>Calulú de Peixe</h4>
+                <p>Última vez: 07/05/2026</p>
+                <span class="status-tag">Arquivado</span>
+            </div>
+            <div class="history-actions">
+                <button class="btn-action btn-republish">REPUBLICAR</button>
+                <button class="btn-action btn-delete">ELIMINAR</button>
+            </div>
+        </div>
+
+    </div>
+</main>
+<script src="../historico.js"></script>
+</body>
+</html>

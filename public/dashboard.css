@@ -1,0 +1,266 @@
+:root {
+  --bg: #f0f7f7;
+  --tx: #035373;
+  --ef: #04bfbf;
+  --white: #ffffff;
+  --sidebar-width: 260px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --- SIDEBAR --- */
+aside {
+  width: var(--sidebar-width);
+  background-color: var(--tx);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  position: fixed;
+  height: 100vh;
+  z-index: 100;
+}
+
+.profile-section {
+  text-align: center;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 30px;
+}
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid var(--ef);
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.profile-section h2 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ef);
+}
+
+.nav-links {
+  flex-grow: 1;
+}
+
+.nav-links a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 12px 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: var(--ef);
+  transform: translateX(5px);
+}
+
+.logout-btn {
+  background: transparent;
+  border: 2px solid #ff4b5c;
+  color: #ff4b5c;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #ff4b5c;
+  color: white;
+}
+
+/* --- CONTEÚDO PRINCIPAL --- */
+main {
+  margin-left: var(--sidebar-width);
+  flex-grow: 1;
+  padding: 40px;
+}
+
+.header-dash {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.header-dash h1 {
+  color: var(--tx);
+  font-size: 1.8rem;
+}
+
+.card-form {
+  background: var(--white);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  max-width: 700px;
+}
+
+.hidden{
+    display: none;
+    opacity: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%; 
+}
+
+input,
+textarea,
+select {
+  width: 100%; 
+  padding: 12px;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  outline: none;
+  transition: 0.3s;
+  font-size: 1rem;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--ef);
+}
+
+.btn-save {
+  width: 100%;
+  background: var(--ef);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.3s;
+}
+
+.btn-save:hover {
+  background: var(--tx);
+  transform: translateY(-2px);
+}
+
+/* Preview da imagem */
+#preview {
+  width: 100%;
+  height: 150px;
+  background: #f9f9f9;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  color: #aaa;
+  overflow: hidden;
+}
+
+#preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  aside {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 20px;
+  }
+
+  .profile-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    text-align: left;
+  }
+
+  .profile-pic {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .nav-links a {
+    white-space: nowrap;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  
+  main {
+    margin-left: 0; 
+    padding: 20px;
+  }
+
+  .header-dash h1 {
+    font-size: 1.5rem;
+  }
+
+   .form-grid {
+    grid-template-columns: 1fr; 
+  }
+
+  .full-width {
+    grid-column: span 1;
+  }
+  
+  .card-form {
+    max-width: 100%; 
+  }
+}

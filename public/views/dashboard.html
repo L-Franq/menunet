@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../dashboard.css" />
+    <link rel="shortcut icon" href="../img/icon/icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="..vendor/animate.css" />
+    <link
+      rel="stylesheet"
+      href="../vendor/fontawesome-free-7.2.0-web/css/all.min.css
+    "
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>MenuNet | Dashboard Admin</title>
+  </head>
+  <body>
+    <aside class="animate__animated animate__fadeInLeft">
+      <div class="profile-section">
+        <img src="../img/logo.jpg" alt="Foto de Perfil" class="profile-pic" />
+        <input hidden type="file" name="" id="picture">
+        <h2 id="userName">Temperos Da Tchocha</h2>
+      </div>
+
+      <nav class="nav-links">
+        <a id="n1" href=""><i class="fa-solid fa-cubes-stacked"></i>&nbsp;<span>Montar Menu</span></a>
+        <a id="n2" href=""><i class="fa-solid fa-clock-rotate-left"></i>&nbsp;<span>Histórico</span></a>
+      </nav>
+
+      <button class="logout-btn">SAIR&nbsp;<i class="fa-solid fa-right-from-bracket"></i></button>
+    </aside>
+
+    <main id="pai" class="hidden">
+      <header class="header-dash animate__animated animate__fadeIn">
+        <div>
+          <h1>Olá, <span id="adminName">Gerente</span>! <i class="fa-regular fa-hand-peace"></i></h1>
+          <p>O que vamos adicionar como prato hoje?</p>
+        </div>
+      </header>
+
+      <section class="card-form animate__animated animate__fadeInUp">
+        <form action="">
+          <div class="form-grid">
+            <div class="input-block full-width">
+              <label>Imagem do Prato&nbsp;<i class="fa-regular fa-image"></i></label>
+              <input type="file" accept="image/*" id="imgInput" />
+              <div id="preview">Preview da imagem</div>
+            </div>
+
+            <div class="input-block">
+              <label>Nome do Prato</label>
+              <input type="text" placeholder="Ex: Calulú de Carne" required />
+            </div>
+
+            <div class="input-block">
+              <label>Preço (Kz)</label>
+              <input type="number" placeholder="Ex: 5000" required />
+            </div>
+
+            <div class="input-block">
+              <label>Categoria</label>
+              <select>
+                <option value="comidos">Comida</option>
+                <option value="bebidos">Bebida</option>
+              </select>
+            </div>
+
+            <div class="input-block">
+              <label>Disponibilidade</label>
+              <select>
+                <option value="disponivel">Disponível</option>
+                <option value="esgotado">Esgotado</option>
+              </select>
+            </div>
+
+            <div class="input-block full-width">
+              <label>Descrição detalhada</label>
+              <textarea
+                rows="4"
+                placeholder="Descreva os ingredientes e acompanhamentos..."
+              ></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-save">Publicar Prato</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="../dashboard.js"></script>
+  </body>
+</html>
