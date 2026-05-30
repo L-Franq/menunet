@@ -117,9 +117,9 @@ main {
   max-width: 700px;
 }
 
-.hidden{
-    display: none;
-    opacity: 0;
+.hidden {
+  display: none;
+  opacity: 0;
 }
 
 .form-grid {
@@ -143,13 +143,13 @@ main {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 100%; 
+  width: 100%;
 }
 
 input,
 textarea,
 select {
-  width: 100%; 
+  width: 100%;
   padding: 12px;
   border: 2px solid #eee;
   border-radius: 10px;
@@ -179,6 +179,164 @@ textarea:focus {
 .btn-save:hover {
   background: var(--tx);
   transform: translateY(-2px);
+}
+
+/*Preview da lista* /
+
+/* Container para dividir Form e Lista */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* Form um pouco maior que a lista */
+  gap: 30px;
+  align-items: start;
+}
+
+/* Botão de Publicação no Header */
+.btn-publish-all {
+  background: var(--tx);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 15px rgba(3, 83, 115, 0.3);
+}
+
+.btn-publish-all:hover {
+  background: var(--ef);
+  transform: scale(1.05);
+}
+
+/* Coluna da Fila */
+.queue-section {
+  background: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px dashed #ccc;
+  min-height: 500px;
+}
+
+.queue-header {
+  margin-bottom: 20px;
+  color: var(--tx);
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+/* Estilo dos Mini-Cards (Baseado na sua imagem de Histórico) */
+.mini-card {
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 15px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  position: relative;
+  animation: fadeInRight 0.4s ease;
+}
+
+.mini-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.mini-card-info {
+  flex-grow: 1;
+}
+
+.mini-card-info h4 {
+  font-size: 0.9rem;
+  color: var(--tx);
+}
+
+.mini-card-info span {
+  font-size: 0.8rem;
+  color: var(--ef);
+  font-weight: 600;
+}
+
+.btn-remove-mini {
+  background: #fff0f1;
+  color: #ff4b5c;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-remove-mini:hover {
+  background: #ff4b5c;
+  color: white;
+}
+
+.empty-state {
+  text-align: center;
+  color: #999;
+  margin-top: 50px;
+}
+
+/* Ajuste Mobile */
+@media (max-width: 1100px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Estilo específico para o campo de Slug */
+.input-block span {
+  background: #eee;
+  padding: 12px;
+  border-radius: 10px 0 0 10px;
+  border: 2px solid #eee;
+  border-right: none;
+  font-weight: 600;
+}
+
+/* Ajuste para inputs que ficam ao lado do prefixo da URL */
+.input-block div input {
+  border-radius: 0 10px 10px 0;
+}
+
+/* Títulos internos dos cards */
+.card-form h3 {
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Aplica o recuo tanto no main quanto na seção de perfil */
+main, 
+#perfil-settings {
+  margin-left: var(--sidebar-width);
+  padding: 40px;
+  flex-grow: 1;
+  min-height: 100vh;
+  transition: 0.3s; /* Suaviza a transição se precisar */
+}
+
+/* Em telas menores, removemos o recuo porque a sidebar vai para o topo */
+@media (max-width: 768px) {
+  main, 
+  #perfil-settings {
+    margin-left: 0;
+    padding: 20px;
+  }
+}
+
+/* Responsividade para a aba perfil */
+@media (max-width: 1000px) {
+  #perfil-settings .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Preview da imagem */
@@ -242,9 +400,8 @@ textarea:focus {
     font-size: 0.9rem;
   }
 
-  
   main {
-    margin-left: 0; 
+    margin-left: 0;
     padding: 20px;
   }
 
@@ -252,15 +409,15 @@ textarea:focus {
     font-size: 1.5rem;
   }
 
-   .form-grid {
-    grid-template-columns: 1fr; 
+  .form-grid {
+    grid-template-columns: 1fr;
   }
 
   .full-width {
     grid-column: span 1;
   }
-  
+
   .card-form {
-    max-width: 100%; 
+    max-width: 100%;
   }
 }

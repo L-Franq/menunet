@@ -16,7 +16,9 @@ require("./databases/init");
 const mainRoute = require("./routers/menu");
 const layouts = require("./routers/layoutsRoutes");
 const superAdmin = require("./routers/superAdmin");
+const dadosrestaurantes = require("./routers/managerRoute");
 
+app.use("/menunet/dados", dadosrestaurantes);
 app.use(mainRoute);
 app.use(superAdmin);
 app.use("/layout", layouts);

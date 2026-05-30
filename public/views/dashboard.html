@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../dashboard.css" />
     <link rel="shortcut icon" href="../img/icon/icon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="..vendor/animate.css" />
+    <link rel="stylesheet" href="../vendor/animate.css" />
+    <link rel="stylesheet" href="../vendor/sweet.css">
     <link
       rel="stylesheet"
       href="../vendor/fontawesome-free-7.2.0-web/css/all.min.css
@@ -21,75 +22,191 @@
     <aside class="animate__animated animate__fadeInLeft">
       <div class="profile-section">
         <img src="../img/logo.jpg" alt="Foto de Perfil" class="profile-pic" />
-        <input hidden type="file" name="" id="picture">
-        <h2 id="userName">Temperos Da Tchocha</h2>
+        <input hidden type="file" name="" id="picture" />
+        <h2 id="manegerName">Carregando</h2>
       </div>
 
       <nav class="nav-links">
-        <a id="n1" href=""><i class="fa-solid fa-cubes-stacked"></i>&nbsp;<span>Montar Menu</span></a>
-        <a id="n2" href=""><i class="fa-solid fa-clock-rotate-left"></i>&nbsp;<span>Histórico</span></a>
+        <a id="perfil1" href=""
+          ><i class="fa-regular fa-address-book"></i>&nbsp;<span
+            >Perfil</span
+          ></a
+        >
+        <a id="n1" href=""
+          ><i class="fa-solid fa-cubes-stacked"></i>&nbsp;<span
+            >Montar Menu</span
+          ></a
+        >
+        <a id="n2" href=""
+          ><i class="fa-solid fa-clock-rotate-left"></i>&nbsp;<span
+            >Histórico</span
+          ></a
+        >
       </nav>
 
-      <button class="logout-btn">SAIR&nbsp;<i class="fa-solid fa-right-from-bracket"></i></button>
+      <button id="logout" class="logout-btn">
+        SAIR&nbsp;<i class="fa-solid fa-right-from-bracket"></i>
+      </button>
     </aside>
 
+    <!-- Form para criar e listar os pratos -->
     <main id="pai" class="hidden">
       <header class="header-dash animate__animated animate__fadeIn">
         <div>
-          <h1>Olá, <span id="adminName">Gerente</span>! <i class="fa-regular fa-hand-peace"></i></h1>
-          <p>O que vamos adicionar como prato hoje?</p>
+          <h1>
+            Olá, <span id="adminName">Gerente</span>!
+            <i class="fa-regular fa-hand-peace"></i>
+          </h1>
+          <p>Crie seus pratos e publique o menu completo quando terminar.</p>
         </div>
+        <button id="publishAll" class="btn-publish-all">
+          PUBLICAR MENU COMPLETO <i class="fa-solid fa-cloud-arrow-up"></i>
+        </button>
       </header>
 
-      <section class="card-form animate__animated animate__fadeInUp">
-        <form action="">
-          <div class="form-grid">
-            <div class="input-block full-width">
-              <label>Imagem do Prato&nbsp;<i class="fa-regular fa-image"></i></label>
-              <input type="file" accept="image/*" id="imgInput" />
-              <div id="preview">Preview da imagem</div>
+      <div class="dashboard-grid">
+        <section class="card-form animate__animated animate__fadeInLeft">
+          <form id="dishForm">
+            <div class="form-grid">
+              <div class="input-block full-width">
+                <label
+                  >Imagem do Prato <i class="fa-regular fa-image"></i
+                ></label>
+                <input type="file" accept="image/*" id="imgInput" />
+                <div id="preview">Preview da imagem</div>
+              </div>
+              <div class="input-block">
+                <label>Nome do Prato</label>
+                <input
+                  type="text"
+                  id="dishName"
+                  placeholder="Ex: Calulú de Carne"
+                  required
+                />
+              </div>
+              <div class="input-block">
+                <label>Preço (Kz)</label>
+                <input
+                  type="number"
+                  id="dishPrice"
+                  placeholder="Ex: 5000"
+                  required
+                />
+              </div>
+              <div class="input-block">
+                <label>Categoria</label>
+                <select id="dishCategory">
+                  <option value="Comida">Comida</option>
+                  <option value="Bebida">Bebida</option>
+                </select>
+              </div>
+              <div class="input-block">
+                <label>Disponibilidade</label>
+                <select id="dishStatus">
+                  <option value="disponivel">Disponível</option>
+                  <option value="esgotado">Esgotado</option>
+                </select>
+              </div>
             </div>
+            <button type="button" id="addToQueue" class="btn-save">
+              ADICIONAR À LISTA <i class="fa-solid fa-plus"></i>
+            </button>
+          </form>
+        </section>
 
-            <div class="input-block">
-              <label>Nome do Prato</label>
-              <input type="text" placeholder="Ex: Calulú de Carne" required />
-            </div>
-
-            <div class="input-block">
-              <label>Preço (Kz)</label>
-              <input type="number" placeholder="Ex: 5000" required />
-            </div>
-
-            <div class="input-block">
-              <label>Categoria</label>
-              <select>
-                <option value="comidos">Comida</option>
-                <option value="bebidos">Bebida</option>
-              </select>
-            </div>
-
-            <div class="input-block">
-              <label>Disponibilidade</label>
-              <select>
-                <option value="disponivel">Disponível</option>
-                <option value="esgotado">Esgotado</option>
-              </select>
-            </div>
-
-            <div class="input-block full-width">
-              <label>Descrição detalhada</label>
-              <textarea
-                rows="4"
-                placeholder="Descreva os ingredientes e acompanhamentos..."
-              ></textarea>
-            </div>
+        <section class="queue-section animate__animated animate__fadeInRight">
+          <div class="queue-header">
+            <h3>Pratos na fila (<span id="queueCount">0</span>/10)</h3>
           </div>
 
-          <button type="submit" class="btn-save">Publicar Prato</button>
-        </form>
-      </section>
+          <div id="dishQueue" class="queue-list">
+            <div class="empty-state">Nenhum prato adicionado ainda.</div>
+          </div>
+        </section>
+      </div>
     </main>
 
+    <!-- Form para o pefrfil -->
+    <section
+      id="perfil-settings"
+      class="animate__animated animate__fadeIn hidden"
+    >
+      <div class="header-dash">
+        <h2>Configurações do Restaurante</h2>
+        <p>Gerencie sua identidade digital e segurança.</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="card-form">
+          <h3 style="margin-bottom: 20px; color: var(--tx)">Identidade</h3>
+          <form id="profileForm">
+            <div class="form-grid">
+              <div class="input-block full-width">
+                <label>Nome Exibido no Menu</label>
+                <input
+                  type="text"
+                  value="Exemplos Restaurante"
+                  placeholder="Nome do Restaurante"
+                  id="nomeSettings"
+                />
+              </div>
+
+              <div class="input-block full-width">
+                <label>Slug do Restaurante (URL)</label>
+                <div style="display: flex; align-items: center; gap: 5px">
+                  <span style="color: #888; font-size: 0.9rem"
+                    >menunet.com/</span
+                  >
+                  <input
+                    type="text"
+                    value="exemplo-dos-exemplos"
+                    placeholder="ex: meu-restaurante"
+                    style="flex: 1"
+                    id="slug"
+                  />
+                </div>
+                <small style="color: #888; font-size: 0.75rem"
+                  >Este é o link que você enviará aos clientes.</small
+                >
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="btn-save"
+              style="background: var(--tx)"
+            >
+              ATUALIZAR PERFIL
+            </button>
+          </form>
+        </div>
+
+        <div class="card-form">
+          <h3 style="margin-bottom: 20px; color: #ff4b5c">Segurança</h3>
+          <form id="passwordForm">
+            <div class="input-block" style="margin-bottom: 15px">
+              <label>Senha Atual</label>
+              <input id="senhaSettings" type="password" placeholder="••••••••" />
+            </div>
+
+            <div class="input-block" style="margin-bottom: 15px">
+              <label>Nova Senha</label>
+              <input id="novaSenhaSettings" type="password" placeholder="Mínimo 8 caracteres" />
+            </div>
+
+            <div class="input-block" style="margin-bottom: 15px">
+              <label>Confirmar Nova Senha</label>
+              <input id="confirmSenhaSettings" type="password" placeholder="Repita a nova senha" />
+            </div>
+
+            <button type="submit" class="btn-save" style="background: #ff4b5c">
+              ALTERAR SENHA
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <script src="../vendor/sweet.js"></script>
     <script src="../dashboard.js"></script>
   </body>
 </html>

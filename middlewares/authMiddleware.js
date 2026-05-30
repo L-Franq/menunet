@@ -15,7 +15,7 @@ const authMiddleware = async function (req, res, next) {
   try {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-    req.id_restaurante = decoded.id_restaurante;
+    req.id_restaurante = decoded.id;
     req.email = decoded.email;
     req.slug = decoded.slug;
 
