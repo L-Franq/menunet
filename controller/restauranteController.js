@@ -45,7 +45,7 @@ const login = async function (req, res) {
     const data = loginSchema.parse(req.body);
 
     const result = await modelRestaurante.login(data.email);
-  
+
     if (!result) {
       return res.status(401).json({ erro: "Email ou senha incorretos!" });
     }
@@ -68,7 +68,10 @@ const login = async function (req, res) {
 
     return res
       .status(200)
-      .json({ mensagem: "Login bem sucedido!", token: token });
+      .json({
+        mensagem: "Login bem sucedido!",
+        token: token
+      });
   } catch (error) {
     if (error instanceof ZodError) {
       return res

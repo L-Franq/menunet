@@ -40,7 +40,6 @@ async function login(dadosLogin) {
 
     if (response.ok) {
       localStorage.setItem("token", dadosServer.token);
-
       alertaDoSistema(
         "* * *",
         dadosServer.mensagem || "Logando com sucesso!",

@@ -10,7 +10,7 @@ const alertaDoSistema = function (title, text, icon) {
     text: `${text}`,
     icon: `${icon}`,
     showConfirmButton: false,
-    timer: 3000,
+    timer: 1500,
     timerProgressBar: true,
 
     //ajustes para o sistema
@@ -77,6 +77,68 @@ function updateCount() {
   document.getElementById("queueCount").innerText = count;
 }
 
+async function atualizarDados(dadosAtualizar) {
+  const token = localStorage.getItem("token");
+  try {
+    const response = await fetch(
+      `/menunet/dados/upt/dadosrestaurantes`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(dadosAtualizar),
+      },
+    );
+
+    const dadosServer = await response.json();
+
+    if (response.ok) {
+      alertaDoSistema(
+        " * * *",
+        dadosServer.mensagem || "Atualizado com sucesso!",
+        "info",
+      );
+      window.location.href = "/layout/dashboard";
+    }
+  } catch (error) {
+    console.error("Falha na requisicao: ", error);
+    alertaDoSistema("Falha", "Falha no sistema", "warning");
+  }
+}
+
+async function atualizarSenha(senha) {
+  const token = localStorage.getItem("token");
+  try {
+    const response = await fetch(
+      `/menunet/dados/upt/restaurantessenha`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(senha),
+      },
+    );
+
+    const dadosServer = await response.json();
+
+    if (response.ok) {
+      alertaDoSistema(
+        " * * *",
+        dadosServer.mensagem || "senha atualizada!",
+        "sucess",
+      );
+      window.location.href = "/layout/dashboard";
+    }
+  } catch (error) {
+    console.error("Falha na requisicao: ", error);
+    alertaDoSistema("Falha", "Falha no sistema", "warning");
+  }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("token");
   const nome = document.getElementById("manegerName");
@@ -86,7 +148,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "authorization": `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
       },
     });
 
@@ -96,7 +158,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       alertaDoSistema(
         "Oi!",
         dadosServer.mensagem || `Bem-vindo ${dadosServer.restaurante.nome}`,
-      "info");
+        "info",
+      );
 
       nome.innerText = "";
       nome.innerText = dadosServer.restaurante.nome;
@@ -110,16 +173,39 @@ document.addEventListener("DOMContentLoaded", async () => {
         perfilSettings.classList.remove("hidden");
         main.classList.add("hidden");
 
-        let slug = document.getElementById("slug").value;
-        let nomeSettings = document.getElementById("nomeSettings").value;
-        let senhaSettings = document.getElementById("senhaSettings").value;
+        document.getElementById("slug").value = dadosServer.restaurante.slug;
+        document.getElementById("nomeSettings").value =
+          dadosServer.restaurante.nome;
+        document.getElementById("senhaSettings").value =
+          dadosServer.restaurante.senha;
+        document.getElementById("emailSettings").value =
+          dadosServer.restaurante.email;
 
-        slug = "";
-        nomeSettings = "";
-        senhaSettings = "";
-        slug = dadosServer.restaurante.slug;
-        nomeSettings = dadosServer.restaurante.nome;
-        senhaSettings = dadosServer.restaurante.senha;
+        document
+          .getElementById("profileForm")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const slug = document.getElementById("slug").value;
+            const nome = document.getElementById("nomeSettings").value;
+            const email = document.getElementById("emailSettings").value;
+
+            await atualizarDados({ nome, email, slug });
+          });
+
+        document
+          .getElementById("passwordForm")
+          .addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const senha = document.getElementById("novaSenhaSettings").value;
+            const senhaConfirm = document.getElementById("confirmSenhaSettings").value;
+
+            if(senha !== senhaConfirm){
+              alertaDoSistema("* * *", "as senhas nao sao identicas", "warning");
+              return;
+            }
+
+            await atualizarSenha({ senha });
+          });
       });
     }
 
