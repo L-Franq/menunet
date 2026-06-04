@@ -26,7 +26,7 @@ const update = async function (req, res) {
     if (error instanceof zodError) {
       return res
         .status(400)
-        .json({ error: error.erros?.errors[0]?.message || "Dados invalidos!" });
+        .json({ error: error.errors[0]?.message || "Dados invalidos!" });
     }
     console.error("Falha error: ", error);
     return res.status(500).json({ error: "Falha no catch: ", error });

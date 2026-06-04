@@ -9,8 +9,7 @@ const registerPrato = async function (
   categoria,
   imagem,
 ) {
-  const query = `INSERT INTO pratos (id_restaurante, nome, descricao, preco, categoria, imagem) 
-                 VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
+  const query = `INSERT INTO pratos (id_restaurante, nome, descricao, preco, categoria, imagem) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
   try {
     const result = await db.query(query, [
       id_restaurante,

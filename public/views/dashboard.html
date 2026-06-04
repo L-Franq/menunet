@@ -72,7 +72,7 @@
                 <label
                   >Imagem do Prato <i class="fa-regular fa-image"></i
                 ></label>
-                <input type="file" accept="image/*" id="imgInput" />
+                <input class="publishdata" type="file" accept="image/*" id="imgInput" />
                 <div id="preview">Preview da imagem</div>
               </div>
               <div class="input-block">
@@ -82,6 +82,7 @@
                   id="dishName"
                   placeholder="Ex: Calulú de Carne"
                   required
+                  class="publishdata"
                 />
               </div>
               <div class="input-block">
@@ -91,21 +92,32 @@
                   id="dishPrice"
                   placeholder="Ex: 5000"
                   required
+                  class="publishdata"
                 />
               </div>
               <div class="input-block">
                 <label>Categoria</label>
-                <select id="dishCategory">
+                <select class="publishdata" id="dishCategory">
                   <option value="Comida">Comida</option>
                   <option value="Bebida">Bebida</option>
                 </select>
               </div>
               <div class="input-block">
                 <label>Disponibilidade</label>
-                <select id="dishStatus">
+                <select class="publishdata" id="dishStatus">
                   <option value="disponivel">Disponível</option>
                   <option value="esgotado">Esgotado</option>
                 </select>
+              </div>
+              <div class="input-block">
+                <label>Descrição</label>
+                <textarea
+                  class="publishdata"
+                  type="text"
+                  id="dishDescription"
+                  placeholder="detalhes sobre ingredientes"
+                  required
+                ></textarea>
               </div>
             </div>
             <button type="button" id="addToQueue" class="btn-save">
