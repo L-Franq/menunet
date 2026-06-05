@@ -28,6 +28,7 @@ const registroPrato = async function (req, res) {
     if (registerPrato) {
       return res.status(201).json({ mensagem: "Pratos adicionados ao menu" });
     }
+    return res.status(400).json({erro: "Não foi possível registrar o prato!"});
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({

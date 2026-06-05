@@ -20,7 +20,7 @@ const registerPrato = async function (
       imagem,
     ]);
 
-    result.rows[0];
+    return result.rows[0];
   } catch (error) {
     throw error;
   }
