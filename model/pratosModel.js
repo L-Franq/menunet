@@ -1,5 +1,5 @@
 const db = require("../databases/db");
-const hoje = new Date().getTimezoneOffset();
+const hoje = new Date(); 
 
 const registerPrato = async function (
   id_restaurante,
@@ -26,22 +26,24 @@ const registerPrato = async function (
   }
 };
 
-const mandarParaHistorico = async function (no_menu, created_at, id_pato) {
-  const query = `IF created_at != ${hoje} UPDATE pratos SET no_menu = FALSE`;
-
+const mostrarMenu = async function (
+  id_restaurante,
+  id_prato,
+  nome,
+  preco,
+  imagem,
+) {
+  const query =
+    "SELECT id_prato, nome, preco, imagem, id_restaurante From pratos WHERE id_restaurante = $1";
   try {
-    const result = await db.query(query, [no_menu, created_at, id_pato]);
-    result.rowCount;
-  } catch (error) {
-    throw error;
-  }
-};
-
-const osDohistorico = async function (no_menu) {
-  const query = `SELECT imagem, nome, created_at FROM pratos WHERE no_menu = FALSE`;
-  try {
-    const result = await db.query(query, [no_menu]);
-    result.rows[0];
+    const result = await db.query(query, [
+      id_restaurante,
+      id_prato,
+      nome,
+      preco,
+      imagem,
+    ]);
+    return result.rows;
   } catch (error) {
     throw error;
   }
@@ -51,7 +53,7 @@ const republicarDoHistorico = async function (no_menu, created_at, id_prato) {
   const query = `UPDATE pratos SET no_menu = TRUE, created_at = ${hoje} WHERE id_prato = $3`;
   try {
     const result = await db.query(query, [no_menu, created_at, id_prato]);
-    result.rowCount;
+    return result.rowCount;
   } catch (error) {
     throw error;
   }
@@ -61,7 +63,7 @@ const deletarDoHistorico = async function (id_pato) {
   const query = `DELETE * FROM pratos WHERE id_pratos = $1`;
   try {
     const result = await db.query(query, [id_pato]);
-    result.rowCount;
+    return result.rowCount;
   } catch (error) {
     throw error;
   }
@@ -69,8 +71,7 @@ const deletarDoHistorico = async function (id_pato) {
 
 module.exports = {
   registerPrato,
-  mandarParaHistorico,
   republicarDoHistorico,
-  osDohistorico,
   deletarDoHistorico,
+  mostrarMenu,
 };

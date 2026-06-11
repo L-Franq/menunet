@@ -1,4 +1,4 @@
-const historicoModel = require("../model/historicoModel");
+const pratosModel = require("../model/pratosModel");
 const { pratoSchema } = require("../schemas/pratoSchema");
 const { ZodError } = require("zod");
 
@@ -16,7 +16,7 @@ const registroPrato = async function (req, res) {
 
     const imagemPath = req.file.path;
 
-    const registerPrato = await historicoModel.registerPrato(
+    const registerPrato = await pratosModel.registerPrato(
       req.id_restaurante,
       data.nome,
       data.descricao,

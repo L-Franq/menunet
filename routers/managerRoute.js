@@ -3,7 +3,7 @@ const { authMiddleware } = require("../middlewares/authMiddleware");
 const controller = require("../controller/restauranteController");
 const infoSettings = require("../controller/restauranteSettingsController");
 const { uploads } = require("../services/uploads/multerDishPic");
-const historicoController = require("../controller/pratoController");
+const pratoController = require("../controller/pratoController");
 
 router.get("/dadosrestaurantes", authMiddleware, controller.dadosrestaurantes);
 router.post("/registro", controller.register);
@@ -16,7 +16,7 @@ router.post(
   "/pratoregister",
   authMiddleware,
   uploads.single("imagem"),
-  historicoController.registroPrato,
+  pratoController.registroPrato,
 );
 
 module.exports = router;
