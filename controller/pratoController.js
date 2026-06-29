@@ -28,7 +28,9 @@ const registroPrato = async function (req, res) {
     if (registerPrato) {
       return res.status(201).json({ mensagem: "Pratos adicionados ao menu" });
     }
-    return res.status(400).json({erro: "Não foi possível registrar o prato!"});
+    return res
+      .status(400)
+      .json({ erro: "Não foi possível registrar o prato!" });
   } catch (error) {
     if (error instanceof ZodError) {
       return res.status(400).json({
@@ -42,4 +44,23 @@ const registroPrato = async function (req, res) {
   }
 };
 
-module.exports = { registroPrato };
+const mostarMenu = async (req, res) => {
+  try {
+    const menuRestaurante = await pratosModel.mostrarMenuPorSlug(req.params.slug);
+
+    if (!menuRestaurante || menuRestaurante.length === 0) {
+      return res
+        .status(404)
+        .json({ erro: `Nenhum menu encontrado de ${req.params.slug}.` });
+    }
+
+    return res.status(200).json({ mensagem: menuRestaurante });
+  } catch (error) {
+    console.error("Falha Catch: ", error);
+    return res
+      .status(500)
+      .json({ erro: "Falha ao buscar menu. Tente mais tarde!" });
+  }
+};
+
+module.exports = { registroPrato, mostarMenu };

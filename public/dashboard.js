@@ -3,6 +3,7 @@ const main = document.getElementById("pai");
 const imgInput = document.getElementById("imgInput");
 const preview = document.getElementById("preview");
 const perfilSettings = document.getElementById("perfil-settings");
+const QrContainer = document.getElementById("Qr-container");
 let listaParaPublicar = [];
 
 const alertaDoSistema = function (title, text, icon) {
@@ -191,6 +192,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (perfil) {
       perfil.addEventListener("click", (e) => {
         e.preventDefault();
+        QrContainer.classList.add("hidden");
         perfilSettings.classList.remove("hidden");
         main.classList.add("hidden");
 
@@ -241,6 +243,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (novoItem) {
       novoItem.addEventListener("click", (e) => {
         e.preventDefault();
+        QrContainer.classList.add("hidden");
         perfilSettings.classList.add("hidden");
         main.classList.remove("hidden");
 
@@ -305,6 +308,54 @@ document.addEventListener("DOMContentLoaded", async () => {
             await publicarPratos();
           });
       });
+    }
+
+    const qrCode = document.getElementById("qrCode");
+
+    if (qrCode) {
+      const slug = dadosServer.restaurante.slug;
+      qrCode.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        perfilSettings.classList.add("hidden");
+        main.classList.add("hidden");
+        QrContainer.classList.remove("hidden");
+
+        const container = document.getElementById("canvas-qrcode");
+        container.innerHTML = "";
+
+        const urlDoMenu = `http://localhost:4500/layout/menunet/${slug}`;
+
+        const qrCode = new QRCode(container, {
+          text: urlDoMenu,
+          width: 256,
+          height: 240,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.H,
+        });
+
+        document
+          .getElementById("btn-baixar-qr")
+          .addEventListener("click", () => {
+            const imgQrCode = container.querySelector("img");
+
+            if (imgQrCode) {
+              const linkBaixar = document.createElement("a");
+              linkBaixar.href = imgQrCode.src;
+              linkBaixar.download = `qrcode-${slug}.png`;
+              linkBaixar.click();
+            }
+          });
+      });
+    }
+
+    const verMenu = document.getElementById("verMenu");
+
+    if (verMenu) {
+      const slug = dadosServer.restaurante.slug;
+      verMenu.setAttribute("target", "_blank");
+      verMenu.setAttribute("href", `/layout/menunet/${slug}`);
     }
   } catch (error) {
     console.error("Falha ao requerer os dados: ", error);

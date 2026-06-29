@@ -154,6 +154,10 @@ footer a:hover {
   color: var(--ef);
 }
 
+/*Pagina do qrcode*/
+
+/*----------------*/
+
 @media (max-width: 600px) {
   #grouper {
     grid-template-columns: 1fr;

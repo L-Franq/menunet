@@ -1,5 +1,5 @@
 const db = require("../databases/db");
-const hoje = new Date(); 
+const hoje = new Date();
 
 const registerPrato = async function (
   id_restaurante,
@@ -26,22 +26,13 @@ const registerPrato = async function (
   }
 };
 
-const mostrarMenu = async function (
-  id_restaurante,
-  id_prato,
-  nome,
-  preco,
-  imagem,
-) {
-  const query =
-    "SELECT id_prato, nome, preco, imagem, id_restaurante From pratos WHERE id_restaurante = $1";
+const mostrarMenuPorSlug = async function (slug) {
+  const query = `SELECT p.id_prato, p.nome, p.preco, p.imagem, p.categoria,
+   r.nome AS nome_restaurante FROM pratos p JOIN restaurantes r ON 
+   p.id_restaurante = r.id_restaurante WHERE r.slug = $1`;
   try {
     const result = await db.query(query, [
-      id_restaurante,
-      id_prato,
-      nome,
-      preco,
-      imagem,
+      slug
     ]);
     return result.rows;
   } catch (error) {
@@ -73,5 +64,5 @@ module.exports = {
   registerPrato,
   republicarDoHistorico,
   deletarDoHistorico,
-  mostrarMenu,
+  mostrarMenuPorSlug,
 };

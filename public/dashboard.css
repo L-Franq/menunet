@@ -314,7 +314,7 @@ textarea:focus {
 }
 
 /* Aplica o recuo tanto no main quanto na seção de perfil */
-main, 
+main,
 #perfil-settings {
   margin-left: var(--sidebar-width);
   padding: 40px;
@@ -325,7 +325,7 @@ main,
 
 /* Em telas menores, removemos o recuo porque a sidebar vai para o topo */
 @media (max-width: 768px) {
-  main, 
+  main,
   #perfil-settings {
     margin-left: 0;
     padding: 20px;
@@ -419,5 +419,133 @@ main,
 
   .card-form {
     max-width: 100%;
+  }
+}
+
+/*Qr code*/
+
+#Qr-container {
+  margin-left: var(--sidebar-width);
+  padding: 40px;
+  flex-grow: 1;
+  min-height: 50vh;
+  transition: 0.3s; /* Suaviza a transição se precisar */
+}
+#Qr-container {
+  :root {
+    --bg: #f4f9f9;
+    --tx: #035373;
+    --ef: #04bfbf;
+    --white: #ffffff;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+
+  body {
+    background-color: var(--bg);
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  header #logo img {
+    max-height: 30px;
+  }
+
+  main,
+  #qr {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .qrcode-card {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(3, 83, 115, 0.1);
+    max-width: 350px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .qrcode-header h3 {
+    color: var(--tx);
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .qrcode-header p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+  }
+
+  #canvas-qrcode {
+    background: var(--white);
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px dashed rgba(3, 83, 115, 0.2);
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #canvas-qrcode img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  #btn-baixar-qr {
+    background-color: var(--tx);
+    color: var(--white);
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition:
+      background-color 0.3s ease,
+      transform 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #btn-baixar-qr:hover {
+    background-color: var(--ef);
+  }
+
+  #btn-baixar-qr:active {
+    transform: scale(0.98);
+  }
+
+  footer {
+    padding: 20px;
+    text-align: center;
+    color: var(--tx);
+    font-size: 0.85rem;
   }
 }

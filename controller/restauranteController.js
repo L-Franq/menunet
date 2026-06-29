@@ -66,12 +66,10 @@ const login = async function (req, res) {
       expiresIn: "15d",
     });
 
-    return res
-      .status(200)
-      .json({
-        mensagem: "Login bem sucedido!",
-        token: token
-      });
+    return res.status(200).json({
+      mensagem: "Login bem sucedido!",
+      token: token,
+    });
   } catch (error) {
     if (error instanceof ZodError) {
       return res

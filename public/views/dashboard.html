@@ -5,23 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../dashboard.css" />
     <link rel="shortcut icon" href="../img/icon/icon.png" type="image/x-icon" />
-    <link rel="stylesheet" href="../vendor/animate.css" />
-    <link rel="stylesheet" href="../vendor/sweet.css">
+    <link rel="stylesheet" href="../vendor//animate.css" />
+    <link rel="stylesheet" href="../vendor//sweet.css">
     <link
       rel="stylesheet"
-      href="../vendor/fontawesome-free-7.2.0-web/css/all.min.css
+      href="../vendor//fontawesome-free-7.2.0-web/css/all.min.css
     "
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
-    <title>MenuNet | Dashboard Admin</title>
+    <title>MenuNet | Dashboard Gerente</title>
   </head>
   <body>
     <aside class="animate__animated animate__fadeInLeft">
       <div class="profile-section">
-        <img src="../img/Logo.png" alt="Foto de Perfil" class="profile-pic" />
+        <img src="/img/Logo.png" alt="Foto de Perfil" class="profile-pic" />
         <input hidden type="file" name="" id="picture" />
         <h2 id="manegerName">Carregando</h2>
       </div>
@@ -40,6 +40,16 @@
         <a id="n2" href=""
           ><i class="fa-solid fa-clock-rotate-left"></i>&nbsp;<span
             >Histórico</span
+          ></a
+        >
+        <a target="_blank" id="qrCode"
+          ><i class="fa-solid fa-qrcode"></i>&nbsp;<span
+            >Gerar QrCode</span
+          ></a
+        >
+        <a id="verMenu"
+          ><i class="fa-solid fa-eye"></i>&nbsp;<span
+            >Ver Menu</span
           ></a
         >
       </nav>
@@ -228,6 +238,35 @@
       </div>
     </section>
 
+    <section id="Qr-container" class="hidden">
+      <header class="animate__animated animate__fadeInDown">
+      <div id="logo">
+        <img src="/img/Logo.png" alt="logo" />
+      </div>
+    </header>
+
+    <main id="qr">
+      <div class="qrcode-card animate__animated animate__zoomIn">
+        <div class="qrcode-header">
+          <h3>Cardápio Digital</h3>
+          <p>Aponte a câmera para acessar o menu</p>
+        </div>
+        
+        <!-- É aqui dentro que a biblioteca qrcode.js vai injetar o QR Code -->
+        <div id="canvas-qrcode"></div>
+
+        <button id="btn-baixar-qr">
+          <i class="fas fa-download"></i> Baixar Imagem
+        </button>
+      </div>
+    </main>
+
+    <footer class="animate__animated animate__fadeInUp">
+      <p id="cpright"></p>
+    </footer>
+    </section>
+
+    <script src="../vendor/qrcode.js"></script>
     <script src="../vendor/sweet.js"></script>
     <script src="../dashboard.js"></script>
   </body>

@@ -11,12 +11,14 @@ router.post("/login", controller.login);
 router.put("/upt/dadosrestaurantes", authMiddleware, infoSettings.update);
 router.put("/upt/restaurantessenha", authMiddleware, infoSettings.UpdateSenha);
 
-/*Historico routes*/
+/*Pratos routes*/
 router.post(
   "/pratoregister",
   authMiddleware,
   uploads.single("imagem"),
   pratoController.registroPrato,
 );
+
+router.get("/:slug", pratoController.mostarMenu);
 
 module.exports = router;
