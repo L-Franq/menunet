@@ -13,13 +13,14 @@ router.get("/historico", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "views", "historico.html"));
 });
 
-router.get("/qrcode", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "public", "views", "qrCode.html"));
-});
-
-
 router.get("/menunet/:slug", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "views", "menumain.html"));
+});
+
+router.get("/passwordrecovery", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "..", "public", "views", "passwordRecovery.html"),
+  );
 });
 
 module.exports = router;

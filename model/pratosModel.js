@@ -1,5 +1,4 @@
 const db = require("../databases/db");
-const hoje = new Date();
 
 const registerPrato = async function (
   id_restaurante,
@@ -29,7 +28,7 @@ const registerPrato = async function (
 const mostrarMenuPorSlug = async function (slug) {
   const query = `SELECT p.id_prato, p.nome, p.preco, p.imagem, p.categoria,
    r.nome AS nome_restaurante FROM pratos p JOIN restaurantes r ON 
-   p.id_restaurante = r.id_restaurante WHERE r.slug = $1`;
+   p.id_restaurante = r.id_restaurante WHERE r.slug = $1 AND p.no_menu = TRUE`;
   try {
     const result = await db.query(query, [
       slug
@@ -40,10 +39,24 @@ const mostrarMenuPorSlug = async function (slug) {
   }
 };
 
-const republicarDoHistorico = async function (no_menu, created_at, id_prato) {
-  const query = `UPDATE pratos SET no_menu = TRUE, created_at = ${hoje} WHERE id_prato = $3`;
+const mostrarNoHistorico = async function (id_restaurante) {
+  const query = `SELECT p.id_prato, p.nome, p.imagem, p.created_at,
+   r.nome AS nome_restaurante FROM pratos p JOIN restaurantes r ON 
+   p.id_restaurante = r.id_restaurante WHERE r.id_restaurante = $1 AND p.no_menu = FALSE`;
   try {
-    const result = await db.query(query, [no_menu, created_at, id_prato]);
+    const result = await db.query(query, [
+      id_restaurante
+    ]);
+    return result.rows;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const republicarDoHistorico = async function (id_prato) {
+  const query = `UPDATE pratos SET no_menu = TRUE, created_at = NOW WHERE id_prato = $1`;
+  try {
+    const result = await db.query(query, [id_prato]);
     return result.rowCount;
   } catch (error) {
     throw error;
@@ -51,7 +64,7 @@ const republicarDoHistorico = async function (no_menu, created_at, id_prato) {
 };
 
 const deletarDoHistorico = async function (id_pato) {
-  const query = `DELETE * FROM pratos WHERE id_pratos = $1`;
+  const query = `DELETE FROM pratos WHERE id_prato = $1`;
   try {
     const result = await db.query(query, [id_pato]);
     return result.rowCount;
@@ -65,4 +78,5 @@ module.exports = {
   republicarDoHistorico,
   deletarDoHistorico,
   mostrarMenuPorSlug,
+  mostrarNoHistorico
 };

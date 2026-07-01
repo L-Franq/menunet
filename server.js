@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const PORT = process.env.PORT || 9000;
+const PORT = process.env.PORT || 9000; 
 
 app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
@@ -13,6 +13,7 @@ app.use(cors());
 
 require("./databases/db");
 require("./databases/init");
+require("./services/cronService");
 
 const mainRoute = require("./routers/menu");
 const layouts = require("./routers/layoutsRoutes");

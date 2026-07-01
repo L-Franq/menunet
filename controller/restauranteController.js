@@ -12,7 +12,7 @@ const register = async function (req, res) {
     const verificar = await modelRestaurante.verificarEmail(data.email);
 
     if (verificar) {
-      return res.status(400).json({ erro: "Email ja cadastrado!" });
+      return res.status(400).json({ erro: "Email já cadastrado!" });
     }
 
     const senhaHashed = await bcrypt.hash(data.senha, 10);
@@ -31,12 +31,12 @@ const register = async function (req, res) {
     if (error instanceof ZodError) {
       res
         .status(400)
-        .json({ erro: error.errors?.[0]?.message || "Dados Invalidos" });
+        .json({ erro: error.errors?.[0]?.message || "Dados Inválidos" });
     }
     console.error("Falha catch: ", error);
     return res
       .status(500)
-      .json({ erro: "Falha temporaria no servidor. Tente mais tarde!" });
+      .json({ erro: "Falha temporária no servidor. Tente mais tarde!" });
   }
 };
 
@@ -74,12 +74,12 @@ const login = async function (req, res) {
     if (error instanceof ZodError) {
       return res
         .status(400)
-        .json({ erro: error.errors?.[0]?.message || "Dados Invalidos" });
+        .json({ erro: error.errors?.[0]?.message || "Dados Inválidos" });
     }
     console.error("Falha catch: ", error);
     return res
       .status(500)
-      .json({ erro: "Servidor indisponivel. Tente mais tarde" });
+      .json({ erro: "Servidor indisponível. Tente mais tarde!" });
   }
 };
 
@@ -98,7 +98,7 @@ const dadosrestaurantes = async function (req, res) {
     console.error("Falha catch: ", error);
     return res
       .status(500)
-      .json({ erro: "Servidor indisponivel. Tente mais tarde" });
+      .json({ erro: "Servidor indisponível. Tente mais tarde!" });
   }
 };
 

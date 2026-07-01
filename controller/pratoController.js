@@ -11,7 +11,7 @@ const registroPrato = async function (req, res) {
     }
 
     if (!req.file) {
-      return res.status(400).json({ erro: "A imagem do prato e obrigatoria!" });
+      return res.status(400).json({ erro: "A imagem do prato e obrigatória!" });
     }
 
     const imagemPath = req.file.path;
@@ -40,13 +40,15 @@ const registroPrato = async function (req, res) {
     console.error("Falha Catch: ", error);
     return res
       .status(500)
-      .json({ erro: "Servidor indisponivel. Tente mais tarde!" });
+      .json({ erro: "Servidor indisponível. Tente mais tarde!" });
   }
 };
 
 const mostarMenu = async (req, res) => {
   try {
-    const menuRestaurante = await pratosModel.mostrarMenuPorSlug(req.params.slug);
+    const menuRestaurante = await pratosModel.mostrarMenuPorSlug(
+      req.params.slug,
+    );
 
     if (!menuRestaurante || menuRestaurante.length === 0) {
       return res

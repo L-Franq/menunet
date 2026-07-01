@@ -19,17 +19,17 @@ const update = async function (req, res) {
     }
 
     return res.status(200).json({
-      mensagem: "Informacoes atualizadas com sucesso",
+      mensagem: "Informações atualizadas com sucesso",
       restaurante: req.id_restaurante,
     });
   } catch (error) {
     if (error instanceof zodError) {
       return res
         .status(400)
-        .json({ error: error.errors[0]?.message || "Dados invalidos!" });
+        .json({ error: error.errors[0]?.message || "Dados inválidos!" });
     }
     console.error("Falha error: ", error);
-    return res.status(500).json({ error: "Falha no catch: ", error });
+    return res.status(500).json({ error: "Falha catch: ", error });
   }
 };
 

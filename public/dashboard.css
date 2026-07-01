@@ -62,6 +62,7 @@ aside {
   display: block;
   color: white;
   text-decoration: none;
+  font-weight: 600;
   padding: 12px 15px;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -428,40 +429,16 @@ main,
   margin-left: var(--sidebar-width);
   padding: 40px;
   flex-grow: 1;
-  min-height: 50vh;
+  max-width: 100%;
   transition: 0.3s; /* Suaviza a transição se precisar */
 }
 #Qr-container {
-  :root {
-    --bg: #f4f9f9;
-    --tx: #035373;
-    --ef: #04bfbf;
-    --white: #ffffff;
-  }
-
+  
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-  }
-
-  body {
-    background-color: var(--bg);
-    min-height: 50vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  header {
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  header #logo img {
-    max-height: 30px;
   }
 
   main,
@@ -540,12 +517,5 @@ main,
 
   #btn-baixar-qr:active {
     transform: scale(0.98);
-  }
-
-  footer {
-    padding: 20px;
-    text-align: center;
-    color: var(--tx);
-    font-size: 0.85rem;
   }
 }
