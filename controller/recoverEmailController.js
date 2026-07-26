@@ -23,7 +23,7 @@ const recoveryEmailVerif = async (req, res) => {
 
     await tokenModel.registrarToken(id_restaurante, token, expira_em);
 
-    const linkRecuperacao = `http://localhost:4500/layout/newpassword/${token}`;
+    const linkRecuperacao = `https://menunet.onrender.com/layout/newpassword/${token}`;
 
     await sendRecoveryEmail(email, linkRecuperacao, nome_restaurante);
 

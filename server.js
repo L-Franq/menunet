@@ -26,5 +26,5 @@ app.use("/layout", layouts);
 
 app.listen(PORT, HOST, (erro) => {
   if (erro) return console.error("Falha ao iniciar o servidor: ", erro);
-  console.log(`App runnin on port http://localhost:${PORT}`);
+  console.log(`App running`);
 });
