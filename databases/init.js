@@ -11,6 +11,13 @@ const tabelas = [
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
   );`,
 
+  `CREATE TABLE IF NOT EXISTS tokenst(
+    id_token SERIAL PRIMARY KEY,
+    id_restaurante INTEGER REFERENCES restaurantes(id_restaurante) ON DELETE CASCADE,
+    token VARCHAR(100) NOT NULL,
+    expiracao TIMESTAMPTZ
+    )`,
+
   `CREATE TABLE IF NOT EXISTS pratos (
     id_prato SERIAL PRIMARY KEY,
     id_restaurante INTEGER REFERENCES restaurantes(id_restaurante) ON DELETE CASCADE,
@@ -21,7 +28,7 @@ const tabelas = [
     imagem VARCHAR(200) DEFAULT '',
     no_menu BOOLEAN DEFAULT TRUE, -- TRUE = No Menu de Hoje | FALSE = Histórico
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
-  );`
+  );`,
 ];
 
 async function criarTabelas() {

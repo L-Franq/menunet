@@ -17,27 +17,37 @@ const alertaDoSistema = function (title, text, icon) {
   });
 };
 
+const senha = document.getElementById("senha");
+const senhaConfirm = document.getElementById("senhaConfirm");
+
+senha.addEventListener("input", (e) => {
+  if (e.target.value.length < 8) {
+    erroElement.classList.remove("hidden");
+    erroElement.innerText = "Senha muito curta. Mínimo 8 caracteres!";
+  }
+  erroElement.classList.add("hidden");
+});
+
+senhaConfirm.addEventListener("input", (e) => {
+  if (e.target.value !== senha) {
+    erroElement.classList.remove("hidden");
+    erroElement.innerText = "As senhas não são identicas.";
+    return;
+  }
+  erroElement.classList.add("hidden");
+});
+
 formCadastro.addEventListener("submit", async (e) => {
   e.preventDefault();
   const nome = document.getElementById("nome").value;
   const email = document.getElementById("email").value;
   const slug = document.getElementById("slug").value;
   const senha = document.getElementById("senha").value;
-  const senhaConfirm = document.getElementById("senhaConfirm").value;
 
-  if (senha !== senhaConfirm) {
-    erroElement.classList.remove("hidden");
-    erroElement.innerText = "As senhas não são iguais";
-    return;
-  }
-  if (senha.length < 8) {
-    erroElement.classList.remove("hidden");
-    erroElement.innerText = "Senha curta. Pelo menos 8 caracteres!";
-    return;
-  }
-  erroElement.classList.add("hidden");
+  const sluArray = slug.split(" ");
+  const lastSlug = sluArray.join("-");
 
-  await cadastro({ nome, email, senha, slug });
+  await cadastro({ nome, email, senha, lastSlug });
 });
 
 async function cadastro(dadosCadastro) {

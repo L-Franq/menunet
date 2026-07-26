@@ -1,0 +1,211 @@
+:root {
+  --bg: #f4f9f9;
+  --tx: #035373;
+  --ef: #04bfbf;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--tx);
+  line-height: 1.6;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 30px;
+  background-color: var(--tx);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#logo img {
+  width: 102px;
+  height: 102px;
+  border-radius: 50%;
+  border: 4px solid var(--ef);
+  transition: transform 0.3s ease;
+}
+
+.menu-links{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.menu-links a{
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--ef);
+  margin: 8px;
+  transform: none;
+  border-top: none;
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu-links a:hover{
+  border-top: 2px solid var(--bg);
+  transform: scale(1.05);
+}
+
+#logo img:hover {
+  transform: scale(1.05);
+}
+
+footer {
+  background: #e0f2f2;
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+footer p {
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+}
+
+footer a {
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 600;
+  color: var(--tx);
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: var(--ef);
+}
+
+.home-container {
+  min-height: calc(100vh - 350px); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-content {
+  text-align: center;
+  max-width: 700px;
+  background: var(--white);
+  padding: 50px 40px;
+  border-radius: 24px;
+  box-shadow: 0 15px 35px rgba(3, 83, 115, 0.05);
+}
+
+.home-content h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--tx);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.home-content h1 span {
+  color: var(--ef);
+}
+
+.home-content p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 35px;
+}
+
+/* Estilo do Botão do WhatsApp */
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: #25D366;
+  color: var(--white);
+  text-decoration: none;
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-in{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: var(--tx);
+  color: var(--white);
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 16px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  box-shadow: 0 8px 20px rgba(71, 190, 236, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-cta i, .btn-in i {
+  font-size: 1.4rem;
+}
+
+/* Efeitos de Interação */
+.btn-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4);
+  background-color: #20ba59;
+}
+
+.btn-cta:active, .btn-in:active {
+  transform: translateY(-1px);
+}
+
+.btn-in:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(71, 190, 236, 0.3);
+  background-color: var(--tx);
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 40px 15px;
+  }
+
+  .home-content {
+    padding: 35px 20px;
+  }
+
+  .home-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .home-content p {
+    font-size: 1rem;
+  }
+
+  .btn-cta, .btn-in {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 1rem;
+  }
+
+  header{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .menu-links{
+    margin-top: 8px;
+  }
+}

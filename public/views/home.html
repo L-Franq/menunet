@@ -3,39 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      href="../img/icon/icon.png"
-      type="image/x-icon"
+    <meta
+      name="description"
+      content="
+    Crie um cardápio digital interativo, gere QR Codes exclusivos para as
+          suas mesas e receba pedidos de forma rápida e organizada. Tudo na
+          palma da mão do seu cliente!"
     />
+    <link rel="shortcut icon" href="../img/icon/menunet_icon.png" type="image/x-icon" />
 
     <link rel="stylesheet" href="../vendor/animate.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../vendor/fontawesome-free-7.2.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../menumain.css" />
+    <link
+      rel="stylesheet"
+      href="../vendor/fontawesome-free-7.2.0-web/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/home.css" />
+
     <title>MenuNet | Cardápio Digital</title>
   </head>
   <body>
     <header class="animate__animated animate__fadeInDown">
       <div id="logo">
-        <img src="../img/Logo.png" alt="logo" />
+        <img src="../img/menunet_logo.png" alt="logo da menunet" />
+      </div>
+      <div class="menu-links">
+        <a href="/">Home</a>
+        <a href="#">Pacotes</a>
       </div>
     </header>
 
+    <main class="home-container">
+      <div class="home-content animate__animated animate__zoomIn">
+        <h1>Modernize o seu Restaurante com o <span>MenuNet</span></h1>
+        <p>
+          Crie um cardápio digital interativo, gere QR Codes exclusivos para as
+          suas mesas e receba pedidos de forma rápida e organizada. Tudo na
+          palma da mão do seu cliente!
+        </p>
+
+        <a href="wa.link/1ytjqd" target="_blank" class="btn-cta">
+          <i class="fab fa-whatsapp"></i> Falar Conosco no WhatsApp
+        </a>
+        <a href="/layout/login" target="_blank" class="btn-in">
+          <i class="fa-regular fa-hand-peace"></i> Já Tenho Uma Conta - Entrar
+        </a>
+      </div>
+    </main>
+
     <footer class="animate__animated animate__fadeInUp">
-      <p>
-        &copy; 2026 Todos os direitos reservados | Criado por
-        <strong>Lopo Franqueira</strong>
-      </p>
+      <p id="cpright"></p>
       <div class="social-links">
-        <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
-        <a href="#"><i class="fab fa-linkedin"></i>LinkedIn</a>
-        <a href="#"><i class="fab fa-facebook"></i>Facebook</a>
-        <a href="#"><i class="fab fa-github"></i>GitHub</a>
+        <a target="_blank" href="https://Instagram.com/loth_franqueira"
+          ><i class="fab fa-instagram"></i>Instagram</a
+        >
+        <a target="_blank" href="#"><i class="fab fa-linkedin"></i>LinkedIn</a>
+        <a target="_blank" href="#"><i class="fab fa-facebook"></i>Facebook</a>
+        <a target="_blank" href="https://github.com/L-Franq"
+          ><i class="fab fa-github"></i>GitHub</a
+        >
       </div>
     </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const copy = document.getElementById("cpright");
+        copy.innerHTML = `&copy; ${new Date().getFullYear()} Todos os direitos reservados | Criado por
+        <strong>Lopo Franqueira</strong>`;
+      });
+    </script>
   </body>
 </html>

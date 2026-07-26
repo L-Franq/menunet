@@ -212,7 +212,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             const nome = document.getElementById("nomeSettings").value;
             const email = document.getElementById("emailSettings").value;
 
-            await atualizarDados({ nome, email, slug });
+            const sluArray = slug.split(" ");
+            const lastSlug = sluArray.join("-");
+
+            await atualizarDados({ nome, email, lastSlug });
           });
 
         document
@@ -275,11 +278,21 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "info",
               );
 
+              const priceRegex = price.match(/\d+(\.\d+)?/);
+              if(priceRegex === null)
+                return alertaDoSistema(
+                "* * *",
+                "Preço inválido! Evite vírgula(0,00). Para cêntavos use ponto(0.00).",
+                "info",
+              );
+
+              const priceConvert = parseFloat(price);
+
             const pratoObjeto = {
               id: Date.now(),
               nome: name,
               descricao: description,
-              preco: price,
+              preco: priceConvert.toFixed(2),
               categoria: category,
               arquivo: imgFile,
             };

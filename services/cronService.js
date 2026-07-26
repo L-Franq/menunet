@@ -8,10 +8,10 @@ cron.schedule(
       "[CRON] Executando varredura diária para limpar o menu ativo...",
     );
 
-    const query = `UPDATE pratos SET no_menu = FALSE WHERE no_menu = TRUE`;
+    const sql = `UPDATE pratos SET no_menu = FALSE WHERE no_menu = TRUE`;
 
     try {
-      const result = await db.query(query);
+      const result = await db.query(sql);
       console.log(
         `[CRON] Varredura concluída. ${result.rowCount} pratos foram movidos para o histórico.`,
       );

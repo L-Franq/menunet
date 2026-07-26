@@ -1,28 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../img/icon/icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="../vendor/animate.css">
-    <link rel="stylesheet" href="../vendor/fontawesome-free-7.2.0-web/css/all.min.css">
-    <link rel="stylesheet" href="../login.css">
-    <link rel="stylesheet" href="../vendor/sweet.css">
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../img/icon/menunet_icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="../vendor/animate.css" />
+    <link
+      rel="stylesheet"
+      href="../vendor/fontawesome-free-7.2.0-web/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="stylesheet" href="../vendor/sweet.css" />
     <title>MenuNet | Login</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="register-container animate__animated animate__fadeInUp">
-        <form id="formLogin" action="">
-            <h1>login</h1>
-            <input id="email" required placeholder="exemplo@gmail.com" type="email">
-            <input id="senha" required placeholder="senha" type="password">
-            <p class="hidden" id="erro" style="color: tomato; font-size: 14px; margin: 5px; text-align: center;"></p>
-            <button id="login" type="submit">LOGIN</button>
-             <p class="footer-link">Esqueceu a senha? <a href="">Repor</a></p>
-        </form>
+      <form id="formLogin" action="">
+        <h1>login</h1>
+        <input
+          id="email"
+          required
+          placeholder="exemplo@gmail.com"
+          type="email"
+        />
+        <input id="senha" required placeholder="senha" type="password" />
+        <p
+          class="hidden"
+          id="erro"
+          style="
+            color: tomato;
+            font-size: 14px;
+            margin: 5px;
+            text-align: center;
+          "
+        ></p>
+        <button id="login" type="submit">LOGIN</button>
+        <p class="footer-link">
+          Esqueceu a senha? <a href="/layout/passwordrecovery">Repor</a>
+        </p>
+      </form>
     </div>
 
     <script src="../vendor/sweet.js"></script>
-    <script src="../login.js"></script>
-</body>
+    <script src="../js/login.js"></script>
+  </body>
 </html>

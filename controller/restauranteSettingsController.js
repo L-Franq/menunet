@@ -1,5 +1,6 @@
 const { zodError } = require("zod");
 const { updateSchema } = require("../schemas/updateSchema");
+const tokenModel = require("../model/tokenModel");
 const atualizarDados = require("../model/atulizarRestauranteModel");
 const bcrypt = require("bcrypt");
 
@@ -35,23 +36,30 @@ const update = async function (req, res) {
 
 const UpdateSenha = async function (req, res) {
   try {
-    const { senha } = req.body;
+    const { token, senha } = req.body;
 
-    const senhaHashed = await bcrypt.hash(senha, 10);
-    const valorAtuallizado = atualizarDados.atualizarSenha(
-      senhaHashed,
-      req.id_restaurante,
-    );
+    const tokenUrl = await tokenModel.buscarToken(token);
 
-    if (valorAtuallizado == null) {
-      return;
+    if(!tokenUrl){
+      return res.status(400).json({erro: "Link de verificação inválido ou expirado!"});
     }
 
-    return res
-      .status(200)
-      .json({
-        mensagem: "Senha atualizada com sucesso!",
-      });
+    const id_restaurante = tokenUrl.id_restaurante;
+    const senhaHashed = await bcrypt.hash(senha, 10);
+    console.log(id_restaurante);
+
+    const linhasAfetadas = await atualizarDados.atualizarSenha(
+      senhaHashed,
+      id_restaurante,
+    );
+
+    if (!linhasAfetadas || linhasAfetadas === 0) {
+      return res.status(400).json({ erro: "Falha ao atualizar." });
+    }
+
+    return res.status(200).json({
+      mensagem: "Senha atualizada com sucesso!",
+    });
   } catch (error) {
     console.error("Falha catch: ", error);
     return res

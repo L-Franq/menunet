@@ -7,11 +7,11 @@ const registroPrato = async function (req, res) {
     const data = pratoSchema.parse(req.body);
 
     if (!req.id_restaurante) {
-      return res.status(401).json({ erro: "Falha nas credenciais!" });
+      return res.status(401).json({ erro: "Falha nas credenciais." });
     }
 
     if (!req.file) {
-      return res.status(400).json({ erro: "A imagem do prato e obrigatória!" });
+      return res.status(400).json({ erro: "Imagem do prato em falta. É obrigatória!" });
     }
 
     const imagemPath = req.file.path;
@@ -26,7 +26,7 @@ const registroPrato = async function (req, res) {
     );
 
     if (registerPrato) {
-      return res.status(201).json({ mensagem: "Pratos adicionados ao menu" });
+      return res.status(201).json({ mensagem: "Pratos adicionados ao menu." });
     }
     return res
       .status(400)
@@ -61,7 +61,7 @@ const mostarMenu = async (req, res) => {
     console.error("Falha Catch: ", error);
     return res
       .status(500)
-      .json({ erro: "Falha ao buscar menu. Tente mais tarde!" });
+      .json({ erro: "Falha ao buscar menu! Experimente atualizar a página." });
   }
 };
 

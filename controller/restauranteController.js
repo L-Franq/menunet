@@ -85,7 +85,7 @@ const login = async function (req, res) {
 
 const dadosrestaurantes = async function (req, res) {
   try {
-    const result = await modelRestaurante.dados(req.id_restaurante);
+    const result = await modelRestaurante.buscarDadosRestaurantes(req.id_restaurante);
 
     if (!result) {
       return res.status(400).json({ erro: "Falha ao buscar os dados." });

@@ -1,6 +1,4 @@
 const formverify = document.getElementById("formVerifyEmail");
-//const formRecovery = document.getElementById("formRecovery");
-//const btnRecovery = document.getElementById("recuperar");
 const erroElement = document.getElementById("erro");
 const btnVerify = document.getElementById("verificar");
 
@@ -25,14 +23,12 @@ formverify.addEventListener("submit", async (e) => {
 
   const email = document.getElementById("email").value;
 
-  localStorage.setItem("eu", email);
-
   await emailCheck({ email });
 });
 
 async function emailCheck(dadosLogin) {
   try {
-    const response = await fetch("/securitycheck/passwordrecovery", {
+    const response = await fetch("/menunet/dados/esqueci-senha", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -43,9 +39,12 @@ async function emailCheck(dadosLogin) {
     const dadosServer = await response.json();
 
     if (response.ok) {
-      alertaDoSistema("* * *", dadosServer.mensagem || "Indo...", "success");
-
-      //window.location.href = "/layout/screen/recover";
+      alertaDoSistema(
+        "* * *",
+        dadosServer.mensagem ||
+          "Email de recuperacao enviado, verifique a caixa de entrada.",
+        "success",
+      );
     } else {
       erroElement.classList.remove("hidden");
       erroElement.innerText = dadosServer.erro || "Email nao encontrado!";

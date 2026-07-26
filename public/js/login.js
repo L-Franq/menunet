@@ -24,7 +24,6 @@ formLogin.addEventListener("submit", async (e) => {
   const email = document.getElementById("email").value;
   const senha = document.getElementById("senha").value;
 
-  btnLogar.disabled;
   await login({ email, senha });
 });
 

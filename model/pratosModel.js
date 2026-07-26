@@ -8,9 +8,9 @@ const registerPrato = async function (
   categoria,
   imagem,
 ) {
-  const query = `INSERT INTO pratos (id_restaurante, nome, descricao, preco, categoria, imagem) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
+  const sql = `INSERT INTO pratos (id_restaurante, nome, descricao, preco, categoria, imagem) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
   try {
-    const result = await db.query(query, [
+    const result = await db.query(sql, [
       id_restaurante,
       nome,
       descricao,
@@ -26,11 +26,11 @@ const registerPrato = async function (
 };
 
 const mostrarMenuPorSlug = async function (slug) {
-  const query = `SELECT p.id_prato, p.nome, p.preco, p.imagem, p.categoria,
+  const sql = `SELECT p.id_prato, p.nome, p.preco, p.imagem, p.categoria,
    r.nome AS nome_restaurante FROM pratos p JOIN restaurantes r ON 
    p.id_restaurante = r.id_restaurante WHERE r.slug = $1 AND p.no_menu = TRUE`;
   try {
-    const result = await db.query(query, [
+    const result = await db.query(sql, [
       slug
     ]);
     return result.rows;
@@ -40,11 +40,11 @@ const mostrarMenuPorSlug = async function (slug) {
 };
 
 const mostrarNoHistorico = async function (id_restaurante) {
-  const query = `SELECT p.id_prato, p.nome, p.imagem, p.created_at,
+  const sql = `SELECT p.id_prato, p.nome, p.imagem, p.created_at,
    r.nome AS nome_restaurante FROM pratos p JOIN restaurantes r ON 
    p.id_restaurante = r.id_restaurante WHERE r.id_restaurante = $1 AND p.no_menu = FALSE`;
   try {
-    const result = await db.query(query, [
+    const result = await db.query(sql, [
       id_restaurante
     ]);
     return result.rows;
@@ -54,9 +54,9 @@ const mostrarNoHistorico = async function (id_restaurante) {
 };
 
 const republicarDoHistorico = async function (id_prato) {
-  const query = `UPDATE pratos SET no_menu = TRUE, created_at = NOW WHERE id_prato = $1`;
+  const sql = `UPDATE pratos SET no_menu = TRUE, created_at = NOW() WHERE id_prato = $1`;
   try {
-    const result = await db.query(query, [id_prato]);
+    const result = await db.query(sql, [id_prato]);
     return result.rowCount;
   } catch (error) {
     throw error;
@@ -64,9 +64,9 @@ const republicarDoHistorico = async function (id_prato) {
 };
 
 const deletarDoHistorico = async function (id_pato) {
-  const query = `DELETE FROM pratos WHERE id_prato = $1`;
+  const sql = `DELETE FROM pratos WHERE id_prato = $1`;
   try {
-    const result = await db.query(query, [id_pato]);
+    const result = await db.query(sql, [id_pato]);
     return result.rowCount;
   } catch (error) {
     throw error;

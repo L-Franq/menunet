@@ -6,10 +6,10 @@ const atualizarDadosRestaurante = async function (
   slug,
   id,
 ) {
-  const query = `UPDATE restaurantes SET nome = $1, email = $2, slug = $3 WHERE id_restaurante = $4`;
+  const sql = `UPDATE restaurantes SET nome = $1, email = $2, slug = $3 WHERE id_restaurante = $4`;
 
   try {
-    const result = await db.query(query, [nome, email, slug, id]);
+    const result = await db.query(sql, [nome, email, slug, id]);
     return result.rowCount;
   } catch (error) {
     throw error;
@@ -17,9 +17,9 @@ const atualizarDadosRestaurante = async function (
 };
 
 const atualizarSenha = async function(senha, id) {
-    const query = `UPDATE restaurantes SET senha = $1 WHERE id_restaurante = $2`;
+    const sql = `UPDATE restaurantes SET senha = $1 WHERE id_restaurante = $2`;
     try {
-        const result = await db.query(query, [senha, id]);
+        const result = await db.query(sql, [senha, id]);
         return result.rowCount;
     } catch (error) {
         throw error;

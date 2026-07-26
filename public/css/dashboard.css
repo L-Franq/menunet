@@ -13,21 +13,30 @@
   font-family: "Poppins", sans-serif;
 }
 
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
 body {
   background-color: var(--bg);
   display: flex;
-  min-height: 100vh;
 }
 
 /* --- SIDEBAR --- */
 aside {
   width: var(--sidebar-width);
+  min-width: var(--sidebar-width);
+  flex-shrink: 0;
   background-color: var(--tx);
   color: white;
   display: flex;
   flex-direction: column;
   padding: 30px 20px;
   position: fixed;
+  top: 0;
+  left: 0;
   height: 100vh;
   z-index: 100;
 }
@@ -91,18 +100,23 @@ aside {
   color: white;
 }
 
-/* --- CONTEÚDO PRINCIPAL --- */
-main {
+/* --- ÁREA PRINCIPAL DAS PÁGINAS --- */
+main,
+#perfil-settings {
   margin-left: var(--sidebar-width);
-  flex-grow: 1;
+  width: calc(100% - var(--sidebar-width));
   padding: 40px;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .header-dash {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  gap: 20px;
+  width: 100%;
 }
 
 .header-dash h1 {
@@ -110,34 +124,36 @@ main {
   font-size: 1.8rem;
 }
 
+/* --- LAYOUT LADO A LADO (MENU E PERFIL) --- */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; 
+  gap: 30px;
+  align-items: start;
+  width: 100%;
+}
+
 .card-form {
   background: var(--white);
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  max-width: 700px;
+  width: 100%;
 }
 
 .hidden {
-  display: none;
-  opacity: 0;
+  display: none !important;
 }
 
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
   width: 100%;
 }
 
 .full-width {
-  grid-column: span 2;
-}
-
-.input-block {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  grid-column: 1 / -1;
 }
 
 .input-block {
@@ -182,17 +198,7 @@ textarea:focus {
   transform: translateY(-2px);
 }
 
-/*Preview da lista* /
-
-/* Container para dividir Form e Lista */
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr; /* Form um pouco maior que a lista */
-  gap: 30px;
-  align-items: start;
-}
-
-/* Botão de Publicação no Header */
+/* --- FILA / PREVIEW --- */
 .btn-publish-all {
   background: var(--tx);
   color: white;
@@ -210,13 +216,13 @@ textarea:focus {
   transform: scale(1.05);
 }
 
-/* Coluna da Fila */
 .queue-section {
   background: rgba(255, 255, 255, 0.5);
   padding: 20px;
   border-radius: 20px;
   border: 2px dashed #ccc;
   min-height: 500px;
+  width: 100%;
 }
 
 .queue-header {
@@ -226,7 +232,6 @@ textarea:focus {
   padding-bottom: 10px;
 }
 
-/* Estilo dos Mini-Cards (Baseado na sua imagem de Histórico) */
 .mini-card {
   background: var(--white);
   display: flex;
@@ -235,8 +240,6 @@ textarea:focus {
   border-radius: 15px;
   margin-bottom: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-  position: relative;
-  animation: fadeInRight 0.4s ease;
 }
 
 .mini-card img {
@@ -284,62 +287,6 @@ textarea:focus {
   margin-top: 50px;
 }
 
-/* Ajuste Mobile */
-@media (max-width: 1100px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Estilo específico para o campo de Slug */
-.input-block span {
-  background: #eee;
-  padding: 12px;
-  border-radius: 10px 0 0 10px;
-  border: 2px solid #eee;
-  border-right: none;
-  font-weight: 600;
-}
-
-/* Ajuste para inputs que ficam ao lado do prefixo da URL */
-.input-block div input {
-  border-radius: 0 10px 10px 0;
-}
-
-/* Títulos internos dos cards */
-.card-form h3 {
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Aplica o recuo tanto no main quanto na seção de perfil */
-main,
-#perfil-settings {
-  margin-left: var(--sidebar-width);
-  padding: 40px;
-  flex-grow: 1;
-  min-height: 100vh;
-  transition: 0.3s; /* Suaviza a transição se precisar */
-}
-
-/* Em telas menores, removemos o recuo porque a sidebar vai para o topo */
-@media (max-width: 768px) {
-  main,
-  #perfil-settings {
-    margin-left: 0;
-    padding: 20px;
-  }
-}
-
-/* Responsividade para a aba perfil */
-@media (max-width: 1000px) {
-  #perfil-settings .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* Preview da imagem */
 #preview {
   width: 100%;
@@ -361,6 +308,62 @@ main,
   object-fit: cover;
 }
 
+/* --- QR CODE --- */
+#Qr-container {
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+#Qr-container .qrcode-card {
+  background-color: var(--white);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(3, 83, 115, 0.1);
+  max-width: 350px;
+  width: 100%;
+  text-align: center;
+}
+
+#canvas-qrcode {
+  background: var(--white);
+  padding: 15px;
+  border-radius: 12px;
+  border: 2px dashed rgba(3, 83, 115, 0.2);
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+}
+
+#btn-baixar-qr {
+  background-color: var(--tx);
+  color: var(--white);
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.3s;
+}
+
+#btn-baixar-qr:hover {
+  background-color: var(--ef);
+}
+
+/* --- RESPONSIVIDADE (Apenas telas menores/mobiles) --- */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr; 
+  }
+}
+
 @media (max-width: 768px) {
   body {
     flex-direction: column;
@@ -370,22 +373,14 @@ main,
     width: 100%;
     height: auto;
     position: relative;
+  }
+
+  main,
+  #perfil-settings,
+  #Qr-container {
+    margin-left: 0;
+    width: 100%;
     padding: 20px;
-  }
-
-  .profile-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    text-align: left;
-  }
-
-  .profile-pic {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 0;
   }
 
   .nav-links {
@@ -401,121 +396,4 @@ main,
     font-size: 0.9rem;
   }
 
-  main {
-    margin-left: 0;
-    padding: 20px;
-  }
-
-  .header-dash h1 {
-    font-size: 1.5rem;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .full-width {
-    grid-column: span 1;
-  }
-
-  .card-form {
-    max-width: 100%;
-  }
-}
-
-/*Qr code*/
-
-#Qr-container {
-  margin-left: var(--sidebar-width);
-  padding: 40px;
-  flex-grow: 1;
-  max-width: 100%;
-  transition: 0.3s; /* Suaviza a transição se precisar */
-}
-#Qr-container {
-  
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-  }
-
-  main,
-  #qr {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .qrcode-card {
-    background-color: var(--white);
-    padding: 30px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(3, 83, 115, 0.1);
-    max-width: 350px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .qrcode-header h3 {
-    color: var(--tx);
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-  }
-
-  .qrcode-header p {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 25px;
-  }
-
-  #canvas-qrcode {
-    background: var(--white);
-    padding: 15px;
-    border-radius: 12px;
-    border: 2px dashed rgba(3, 83, 115, 0.2);
-    margin-bottom: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #canvas-qrcode img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  #btn-baixar-qr {
-    background-color: var(--tx);
-    color: var(--white);
-    border: none;
-    padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: 600;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-    transition:
-      background-color 0.3s ease,
-      transform 0.2s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-
-  #btn-baixar-qr:hover {
-    background-color: var(--ef);
-  }
-
-  #btn-baixar-qr:active {
-    transform: scale(0.98);
-  }
 }

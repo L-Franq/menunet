@@ -23,4 +23,10 @@ router.get("/passwordrecovery", (req, res) => {
   );
 });
 
+router.get("/newpassword/:token", (req, res) => {
+  res.sendFile(
+    path.join(__dirname, "..", "public", "views", "newpassword.html"),
+  );
+});
+
 module.exports = router;

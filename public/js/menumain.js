@@ -2,6 +2,9 @@ const pratosContainer = document.getElementById("grouper");
 const data = new Date();
 const copyRight = document.getElementById("cpright");
 const ano = data.getFullYear();
+/*const tipoFiltro = document.getElementById("filtroTipo");
+const precoFiltro = document.getElementById("filtroPreco");
+const filtrosContainer = document.getElementById("filtros");*/
 
 async function generateDishes() {
   const caminhos = window.location.pathname.split("/");
@@ -22,17 +25,16 @@ async function generateDishes() {
       listaDePratos.forEach((prato) => {
         pratosContainer.innerHTML += `
             <div class="card-item animate__animated animate__zoomIn">
-          <img src="/${prato.imagem}" alt="${prato.nome}" />
+          <img src="/${prato.imagem}" alt="um prato de ${prato.nome}" />
           <div class="card-info">
             <h3 class="nome">${prato.nome}</h3>
-            <p class="price">${prato.preco}</p>
+            <p class="price">${prato.preco}KZ</p>
           </div>
         </div>
             `;
       });
     } else {
       const erro = dadosServer.erro;
-      const img = "";
       const preco = "0.00";
 
       pratosContainer.innerHTML = `
