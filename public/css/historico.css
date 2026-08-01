@@ -147,6 +147,17 @@ body {
   box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
 }
 
+.btn-edit {
+  background-color: rgba(31, 182, 228, 0.1);
+  color: var(--tx);
+}
+
+.btn-edit:hover {
+  background-color: var(--tx);
+  color: white;
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
 .btn-delete {
   background-color: rgba(235, 87, 87, 0.1);
   color: var(--danger);
@@ -156,6 +167,23 @@ body {
   background-color: var(--danger);
   color: white;
   box-shadow: 0 4px 12px rgba(235, 87, 87, 0.3);
+} 
+
+.hidden{
+  display: none !important;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999; /* Fica acima da sidebar */
 }
 
 /* Responsividade */

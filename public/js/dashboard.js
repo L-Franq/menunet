@@ -196,13 +196,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         perfilSettings.classList.remove("hidden");
         main.classList.add("hidden");
 
-        document.getElementById("slug").value = dadosServer.restaurante.slug;
+        document.getElementById("slug").value = `${dadosServer.restaurante.slug}`;
         document.getElementById("nomeSettings").value =
-          dadosServer.restaurante.nome;
+          `${dadosServer.restaurante.nome}`;
         document.getElementById("senhaSettings").value =
-          dadosServer.restaurante.senha;
+          `${dadosServer.restaurante.senha}`;
         document.getElementById("emailSettings").value =
-          dadosServer.restaurante.email;
+          `${dadosServer.restaurante.email}`;
 
         document
           .getElementById("profileForm")
@@ -212,10 +212,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const nome = document.getElementById("nomeSettings").value;
             const email = document.getElementById("emailSettings").value;
 
-            const sluArray = slug.split(" ");
-            const lastSlug = sluArray.join("-");
-
-            await atualizarDados({ nome, email, lastSlug });
+            await atualizarDados({ nome, email, slug });
           });
 
         document
@@ -366,9 +363,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const verMenu = document.getElementById("verMenu");
 
     if (verMenu) {
-      const slug = dadosServer.restaurante.slug;
-      verMenu.setAttribute("target", "_blank");
-      verMenu.setAttribute("href", `/layout/menunet/${slug}`);
+      verMenu.addEventListener("click", (e)=>{
+        e.preventDefault();
+        window.location.href = "/layout/gerirpratos";
+      })
     }
   } catch (error) {
     console.error("Falha ao requerer os dados: ", error);

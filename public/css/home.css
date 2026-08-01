@@ -91,7 +91,7 @@ footer a:hover {
   justify-content: center;
   align-items: center;
   padding: 60px 20px;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -131,7 +131,7 @@ footer a:hover {
   background-color: #25D366;
   color: var(--white);
   text-decoration: none;
-  padding: 16px 32px;
+  padding: 14px 28px;
   font-size: 1.1rem;
   font-weight: 600;
   border-radius: 50px;
@@ -148,7 +148,7 @@ footer a:hover {
   color: var(--white);
   text-decoration: none;
   margin-top: 10px;
-  padding: 16px 32px;
+  padding: 14px 28px;
   font-size: 1.1rem;
   font-weight: 600;
   border-radius: 50px;
@@ -177,6 +177,13 @@ footer a:hover {
   background-color: var(--tx);
 }
 
+.action-links{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
 @media (max-width: 768px) {
   .home-container {
     padding: 40px 15px;
@@ -195,9 +202,13 @@ footer a:hover {
   }
 
   .btn-cta, .btn-in {
-    width: 100%;
+    width: 80%;
     padding: 14px 20px;
     font-size: 1rem;
+  }
+
+  .action-links{
+    flex-direction: column;
   }
 
   header{

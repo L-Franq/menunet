@@ -13,6 +13,10 @@ router.get("/historico", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "views", "historico.html"));
 });
 
+router.get("/gerirpratos", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "public", "views", "gerirpratos.html"));
+});
+
 router.get("/menunet/:slug", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "public", "views", "menumain.html"));
 });

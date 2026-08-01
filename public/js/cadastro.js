@@ -28,15 +28,6 @@ senha.addEventListener("input", (e) => {
   erroElement.classList.add("hidden");
 });
 
-senhaConfirm.addEventListener("input", (e) => {
-  if (e.target.value !== senha) {
-    erroElement.classList.remove("hidden");
-    erroElement.innerText = "As senhas não são identicas.";
-    return;
-  }
-  erroElement.classList.add("hidden");
-});
-
 formCadastro.addEventListener("submit", async (e) => {
   e.preventDefault();
   const nome = document.getElementById("nome").value;
@@ -44,10 +35,7 @@ formCadastro.addEventListener("submit", async (e) => {
   const slug = document.getElementById("slug").value;
   const senha = document.getElementById("senha").value;
 
-  const sluArray = slug.split(" ");
-  const lastSlug = sluArray.join("-");
-
-  await cadastro({ nome, email, senha, lastSlug });
+  await cadastro({ nome, email, senha, slug });
 });
 
 async function cadastro(dadosCadastro) {
