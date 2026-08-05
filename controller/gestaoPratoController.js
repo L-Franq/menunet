@@ -10,15 +10,15 @@ const dadosPrato = async (req, res) => {
     const pratoInfo = await pratosModel.buscarPratoInfo(id_prato);
 
     if (!pratoInfo) {
-      return res.status(404).json({ erro: "Prato nao encontrado." });
+      return res.status(404).json({ erro: "Informações do prato em falta." });
     }
 
     return res.status(200).json({ mensagem: pratoInfo });
   } catch (error) {
-    console.error("Falha Catch: ", error);
+    console.error("Falha ao buscar dados de prato: ", error);
     return res
       .status(500)
-      .json({ erro: "Problemas com a conexao. Tente mais tarde!" });
+      .json({ erro: "Problemas com a conexão. Tente mais tarde!" });
   }
 };
 
@@ -27,14 +27,14 @@ const pratosNaGestao = async (req, res) => {
     const pratos = await pratosModel.mostrarNaGestao(req.id_restaurante);
 
     if (!pratos || pratos.length < 0) {
-      return res.status(400).json({ erro: "Sem Pratos no histórico." });
+      return res.status(400).json({ erro: "Sem Pratos no no menu." });
     }
     return res.status(200).json({ mensagem: pratos });
   } catch (error) {
-    console.error("Falha Catch: ", error);
+    console.error("Falha em trazer pratos na gestão: ", error);
     return res
       .status(500)
-      .json({ erro: "Falha na conexão. Tente mais tarde!" });
+      .json({ erro: "Falhas com conexão. Tente dentro de instantes!" });
   }
 };
 
@@ -47,7 +47,7 @@ const pratoAtualizar = async (req, res) => {
     if(!imgPath){
       return res.status(400).json({erro: "Caminho da imagem em falta."});
     }
-
+  
     imgPath = imgPath.replace(/\\/g, "/");
 
     // 2. Remove a barra inicial '/' se ela existir (para evitar guardar //uploads/...)
@@ -70,8 +70,8 @@ const pratoAtualizar = async (req, res) => {
 
     return res.status(200).json({mensagem: "Atualizado."});
   } catch (error) {
-    console.error("Falha catch: ", error);
-    throw error;
+    console.error("Falha em atualizar prato: ", error);
+    return res.status(500).json({erro: "Problemas com a conexão. tente dentro de instantes!"});
   }
 };
 

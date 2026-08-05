@@ -7,10 +7,11 @@ const { sendRecoveryEmail } = require("../services/emailService");
 
 const recoveryEmailVerif = async (req, res) => {
   const { email } = req.body;
+  
   try {
     const emailOnSystem = await modelRestaurante.verificarEmail(email);
     if (!emailOnSystem) {
-      return res.status(404).json({ erro: "Email não registrado no sistema!" });
+      return res.status(400).json({ erro: "Email incorreto." });
     }
 
     const restaurante = await modelRestaurante.login(email);
@@ -32,7 +33,7 @@ const recoveryEmailVerif = async (req, res) => {
         "Email de recuperação enviado. Verifique a caixa entrada ou spam!",
     });
   } catch (error) {
-    console.error("Falha catch: ", error);
+    console.error("Falha em enviar email de recuperação: ", error);
     return res
       .status(500)
       .json({ erro: "Falha na recuperação de email! Tente mais tarde." });
@@ -40,9 +41,9 @@ const recoveryEmailVerif = async (req, res) => {
 };
 
 const recuperarSenha = async (req, res) => {
-  try {
-    const { senha, token } = req.body;
+  const { senha, token } = req.body;
 
+  try {
     const tokenValido = await tokenModel.buscarToken(token);
     if(!tokenValido){
       return res.status(400).json({erro: "Esse Link de recuperação e inválido."});
@@ -71,6 +72,7 @@ const recuperarSenha = async (req, res) => {
       mensagem: "Senha atualizada com sucesso!",
     });
   } catch (error) {
+    console.error("Falha na recuperação de senha: ", error);
     res.status(500).json({erro: "Falha ao atualizar senha. Tente mais tarde!"});
   }
 };

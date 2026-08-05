@@ -12,9 +12,9 @@ router.get("/dadosrestaurantes", authMiddleware, controller.dadosrestaurantes);
 router.post("/registro", controller.register);
 router.post("/login", controller.login);
 router.put("/upt/dadosrestaurantes", authMiddleware, infoSettings.update);
-router.put("/upt/restaurantessenha", authMiddleware, infoSettings.UpdateSenha);
+router.put("/upt/restaurantessenha", authMiddleware, infoSettings.senhaUpdate);
 router.post("/esqueci-senha", recoveryEmailVerif);
-router.put("/rec/password", infoSettings.UpdateSenha);
+router.put("/rec/password", infoSettings.UpdateSenhaRecover);
 
 /*Pratos routes*/
 router.post(

@@ -6,9 +6,9 @@ const { registerSchema } = require("../schemas/registerSchema");
 const { loginSchema } = require("../schemas/loginSchema");
 
 const register = async function (req, res) {
-  try {
-    const data = registerSchema.parse(req.body);
+   const data = registerSchema.parse(req.body);
 
+  try {
     const verificar = await modelRestaurante.verificarEmail(data.email);
 
     if (verificar) {
@@ -33,7 +33,7 @@ const register = async function (req, res) {
         .status(400)
         .json({ erro: error.errors?.[0]?.message || "Dados Inválidos" });
     }
-    console.error("Falha catch: ", error);
+    console.error("Falha em cadastrar: ", error);
     return res
       .status(500)
       .json({ erro: "Falha temporária no servidor. Tente mais tarde!" });
@@ -41,9 +41,9 @@ const register = async function (req, res) {
 };
 
 const login = async function (req, res) {
-  try {
-    const data = loginSchema.parse(req.body);
+  const data = loginSchema.parse(req.body);
 
+  try {
     const result = await modelRestaurante.login(data.email);
 
     if (!result) {
@@ -76,10 +76,10 @@ const login = async function (req, res) {
         .status(400)
         .json({ erro: error.errors?.[0]?.message || "Dados Inválidos" });
     }
-    console.error("Falha catch: ", error);
+    console.error("Falha com o login: ", error);
     return res
       .status(500)
-      .json({ erro: "Servidor indisponível. Tente mais tarde!" });
+      .json({ erro: "Problemas na conexão. Tente dentro de instantes!" });
   }
 };
 
@@ -95,10 +95,10 @@ const dadosrestaurantes = async function (req, res) {
       .status(200)
       .json({ mensagem: `Bem-vindo ${result.nome}`, restaurante: result });
   } catch (error) {
-    console.error("Falha catch: ", error);
+    console.error("Falha ao buscar dados do restaurante: ", error);
     return res
       .status(500)
-      .json({ erro: "Servidor indisponível. Tente mais tarde!" });
+      .json({ erro: "Problemas na conexão. Tente dentro de instantes!" });
   }
 };
 

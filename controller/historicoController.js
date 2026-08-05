@@ -9,7 +9,7 @@ const pratosNoHistorico = async (req, res) => {
     }
     return res.status(200).json({ mensagem: pratos });
   } catch (error) {
-    console.error("Falha Catch: ", error);
+    console.error("Falha em trazer prato do histórico: ", error);
     return res
       .status(500)
       .json({ erro: "Falha na conexão. Tente mais tarde!" });
@@ -17,7 +17,8 @@ const pratosNoHistorico = async (req, res) => {
 };
 
 const republicarPrato = async (req, res) => {
-    const idPrato = req.params.id;
+  const idPrato = req.params.id;
+  
   try {
     const prato = await pratosModel.republicarDoHistorico(idPrato);
     if (prato === 0) {
@@ -25,7 +26,7 @@ const republicarPrato = async (req, res) => {
     }
     return res.status(200).json({ mensagem: "Republicado!" });
   } catch (error) {
-    console.error("Falha catch: ", error);
+    console.error("Falha para republicar prato: ", error);
     return res
       .status(500)
       .json({ erro: "Falha na conexão. Tente mais tarde!" });
@@ -33,7 +34,8 @@ const republicarPrato = async (req, res) => {
 };
 
 const eliminarPrato = async (req, res) => {
-    const idPrato = req.params.id;
+  const idPrato = req.params.id;
+
   try {
     const prato = await pratosModel.deletarDoHistorico(idPrato);
 
@@ -42,7 +44,7 @@ const eliminarPrato = async (req, res) => {
     }
     return res.status(200).json({ mensagem: "Deletado!" });
   } catch (error) {
-    console.error("Falha Catch: ", error);
+    console.error("Falha para eliminar prato: ", error);
     return res.status(500).json({ erro: "Erro na conexão. Tente mais tarde!" });
   }
 };

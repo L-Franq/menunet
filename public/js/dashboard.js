@@ -177,12 +177,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const dadosServer = await await response.json();
 
     if (response.ok) {
-      alertaDoSistema(
-        "Oi!",
-        dadosServer.mensagem || `Bem-vindo ${dadosServer.restaurante.nome}`,
-        "info",
-      );
-
       nome.innerText = "";
       nome.innerText = dadosServer.restaurante.nome;
     }
@@ -334,7 +328,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         const container = document.getElementById("canvas-qrcode");
         container.innerHTML = "";
 
-        const urlDoMenu = `http://localhost:4500/layout/menunet/${slug}`;
+        const urlDoMenu = `https://menunet.onrender.com/layout/menunet/${slug}`;
 
         const qrCode = new QRCode(container, {
           text: urlDoMenu,

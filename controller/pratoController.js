@@ -3,11 +3,11 @@ const { pratoSchema } = require("../schemas/pratoSchema");
 const { ZodError } = require("zod");
 
 const registroPrato = async function (req, res) {
+  const data = pratoSchema.parse(req.body);
+  
   try {
-    const data = pratoSchema.parse(req.body);
-
     if (!req.id_restaurante) {
-      return res.status(401).json({ erro: "Falha nas credenciais." });
+      return res.status(401).json({ erro: "Gerente não identificado. Falha com as credenciais." });
     }
 
     if (!req.file) {
@@ -37,10 +37,10 @@ const registroPrato = async function (req, res) {
         erro: error.errors?.[0]?.message || "Dados incorretos!",
       });
     }
-    console.error("Falha Catch: ", error);
+    console.error("Falha em registrar pratos: ", error);
     return res
       .status(500)
-      .json({ erro: "Servidor indisponível. Tente mais tarde!" });
+      .json({ erro: "Falha Temporária. Tente mais dentro de instantes!" });
   }
 };
 
@@ -58,7 +58,7 @@ const mostarMenu = async (req, res) => {
 
     return res.status(200).json({ mensagem: menuRestaurante });
   } catch (error) {
-    console.error("Falha Catch: ", error);
+    console.error("Falha em mostrar menus: ", error);
     return res
       .status(500)
       .json({ erro: "Falha ao buscar menu! Experimente atualizar a página." });

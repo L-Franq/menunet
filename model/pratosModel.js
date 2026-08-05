@@ -52,7 +52,7 @@ const mostrarNoHistorico = async function (id_restaurante) {
 const mostrarNaGestao = async function (id_restaurante) {
   const sql = `SELECT p.id_prato, p.nome, p.imagem, p.created_at,
    r.nome AS nome_restaurante FROM pratos p JOIN restaurantes r ON 
-   p.id_restaurante = r.id_restaurante WHERE r.id_restaurante = $1 AND p.no_menu = TRUE`;
+   p.id_restaurante = r.id_restaurante WHERE r.id_restaurante = $1 AND p.no_menu = TRUE ORDER BY created_at DESC`;
   try {
     const result = await db.query(sql, [id_restaurante]);
     return result.rows;
