@@ -14,7 +14,7 @@ const alertaDoSistema = function (title, text, icon) {
     text: `${text}`,
     icon: `${icon}`,
     showConfirmButton: false,
-    timer: 1000,
+    timer: 750,
     timerProgressBar: true,
 
     //ajustes para o sistema
