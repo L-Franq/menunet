@@ -4,9 +4,10 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 9000; 
 const HOST = "0.0.0.0";
+const uploadDir = process.env.PERSISTENT_DISK_PATH || path.join(__dirname, "uploads");
 
 app.use(express.static("public"));
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static(uploadDir));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
