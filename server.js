@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 9000; 
+const path = require("path");
 const HOST = "0.0.0.0";
 const uploadDir = process.env.PERSISTENT_DISK_PATH || path.join(__dirname, "uploads");
 

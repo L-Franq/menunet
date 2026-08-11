@@ -1,3 +1,5 @@
+const { urlencoded } = require("express");
+
 const btnVoltar = document.getElementById("voltar");
 const pratosContainer = document.getElementById("historyContainer");
 
@@ -57,8 +59,8 @@ const noHistorico = async () => {
         ? dadosServer
         : dadosServer.mensagem;
 
-        if(listaDePratos.length == 0){
-          pratosContainer.innerHTML = `<div class="history-card">
+      if (listaDePratos.length == 0) {
+        pratosContainer.innerHTML = `<div class="history-card">
             <img src="/img/deadfish.jpg" alt="Prato">
             <div class="history-info">
                 <h4>Sem Histórico</h4>
@@ -70,14 +72,18 @@ const noHistorico = async () => {
                 <button class="btn-action btn-delete">ELIMINAR&nbsp;<i class="fa-regular fa-trash-can"></i></button>
             </div>
         </div>`;
-        }
+      }
       listaDePratos.forEach((prato) => {
+        const pathArray = prato.imagem.split("/");
+        const file = pathArray[pathArray.length - 1];
+        const imgSrc = "uploads" + `/${file}`;
+
         const dataFormatada = new Date(prato.created_at).toLocaleDateString(
           "pt",
         );
         pratosContainer.innerHTML += `
             <div class="history-card" id="card-${prato.id_prato}">
-            <img src="/${prato.imagem}" alt="${prato.nome}">
+            <img src="/${imgSrc}" alt="${prato.nome}">
             <div class="history-info">
                 <h4>${prato.nome}</h4>
                 <p>Última vez: ${dataFormatada}</p>
