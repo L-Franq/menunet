@@ -138,12 +138,16 @@ const naEdicao = async () => {
         </div>`;
       }
       listaDePratos.forEach((prato) => {
+        const pathArray = prato.imagem.split("/");
+      const file = pathArray[pathArray.length - 1];
+      const imgSrc = "uploads" + `/${file}`;
+
         const dataFormatada = new Date(prato.created_at).toLocaleDateString(
           "pt",
         );
         pratosContainer.innerHTML += `
             <div class="history-card" id="card-${prato.id_prato}">
-            <img src="/${prato.imagem}" alt="${prato.nome}">
+            <img src="/${imgSrc}" alt="${prato.nome}">
             <div class="history-info">
                 <h4>${prato.nome}</h4>
                 <p>Última vez: ${dataFormatada}</p>
