@@ -1,5 +1,4 @@
 require("dotenv").config();
-
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 9000; 
@@ -28,5 +27,5 @@ app.use("/layout", layouts);
 
 app.listen(PORT, HOST, (erro) => {
   if (erro) return console.error("Falha ao iniciar o servidor: ", erro);
-  console.log(`App running`);
+  console.log(`Menunet Running`);
 });
