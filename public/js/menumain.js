@@ -18,6 +18,7 @@ async function generateDishes() {
 
     if (response.ok) {
       pratosContainer.innerHTML = "";
+      const imgPath = prato.imagem.replace(/"\/var\/data"/, "/uploads/");
 
       const listaDePratos = Array.isArray(dadosServer)
         ? dadosServer
@@ -25,7 +26,7 @@ async function generateDishes() {
       listaDePratos.forEach((prato) => {
         pratosContainer.innerHTML += `
             <div class="card-item animate__animated animate__zoomIn">
-          <img src="/${prato.imagem}" alt="um prato de ${prato.nome}" />
+          <img src="/${imgPath}" alt="um prato de ${prato.nome}" />
           <div class="card-info">
             <h3 class="nome">${prato.nome}</h3>
             <p class="price">${prato.preco}KZ</p>
