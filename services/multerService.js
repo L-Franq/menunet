@@ -1,9 +1,17 @@
-const multer = require("multer");
+require("dotenv").config();
 const crypto = require("crypto");
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
+
+const uploadDir = process.env.PERSISTENT_DISK_PATH || path.join(__dirname, "../uploads");
+if(!fs.existsSync(uploadDir)){
+  fs.mkdir(uploadDir, ({recursive: true}));
+}
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
     const hash = crypto.randomBytes(6).toString("hex");

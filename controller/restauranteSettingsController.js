@@ -68,7 +68,6 @@ const UpdateSenhaRecover = async function (req, res) {
 
     const id_restaurante = tokenUrl.id_restaurante;
     const senhaHashed = await bcrypt.hash(senha, 10);
-    console.log(id_restaurante);
 
     const linhasAfetadas = await atualizarDados.atualizarSenha(
       senhaHashed,

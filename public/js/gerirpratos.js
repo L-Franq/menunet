@@ -73,7 +73,7 @@ async function dadosPrato(id) {
       nome.value = `${dadosPrato.nome}`;
       preco.value = `${dadosPrato.preco}`;
       descricao.value = `${dadosPrato.descricao}`;
-      imgInput.files[0] = `/${dadosPrato.imagem}`;
+
       const categ = `${dadosPrato.categoria}`;
       if (categ === "Comida") {
         categoria.innerHTML = "";

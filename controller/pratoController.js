@@ -14,6 +14,7 @@ const registroPrato = async function (req, res) {
       return res.status(400).json({ erro: "Imagem do prato em falta. É obrigatória!" });
     }
 
+    //const size = 2 * 1024 * 1024;
     const imagemPath = req.file.path;
 
     const registerPrato = await pratosModel.registerPrato(
