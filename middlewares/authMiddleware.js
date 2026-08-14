@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 
 const authMiddleware = async function (req, res, next) {
   const authHeader = req.headers.authorization;
