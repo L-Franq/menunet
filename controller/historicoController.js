@@ -18,7 +18,7 @@ const pratosNoHistorico = async (req, res) => {
 
 const republicarPrato = async (req, res) => {
   const idPrato = req.params.id;
-  
+
   try {
     const prato = await pratosModel.republicarDoHistorico(idPrato);
     if (prato === 0) {

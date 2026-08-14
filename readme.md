@@ -60,9 +60,7 @@ Todos os direitos reservados a entidade supracitada. Quaisquer tentativas de apr
 ```bash
 git clone https://github.com/L-Franq/menunet.git
 
-cd menunet
-
 npm install
 
-npm start ou npm run dev
+npm start 
 ```

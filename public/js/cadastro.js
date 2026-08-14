@@ -1,6 +1,7 @@
 const formCadastro = document.getElementById("formCadastro");
 const erroElement = document.getElementById("erro");
 
+//Funcão para costumizar a aparencia do alerta da lib sweetalert
 const alertaDoSistema = function (title, text, icon) {
   Swal.fire({
     title: `${title}`,
@@ -25,7 +26,6 @@ senha.addEventListener("input", (e) => {
     erroElement.classList.remove("hidden");
     erroElement.innerText = "Senha muito curta. Mínimo 8 caracteres!";
   }
-  erroElement.classList.add("hidden");
 });
 
 formCadastro.addEventListener("submit", async (e) => {

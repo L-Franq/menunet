@@ -4,6 +4,9 @@ const imgInput = document.getElementById("imgInput");
 const preview = document.getElementById("preview");
 const perfilSettings = document.getElementById("perfil-settings");
 const QrContainer = document.getElementById("Qr-container");
+
+/*Array para armazenar temporáriamente no frontend 
+informações dos pratos a ser publicados*/
 let listaParaPublicar = [];
 
 const alertaDoSistema = function (title, text, icon) {

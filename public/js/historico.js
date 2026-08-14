@@ -1,5 +1,3 @@
-const { urlencoded } = require("express");
-
 const btnVoltar = document.getElementById("voltar");
 const pratosContainer = document.getElementById("historyContainer");
 

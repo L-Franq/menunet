@@ -24,6 +24,7 @@ const recoveryEmailVerif = async (req, res) => {
 
     await tokenModel.registrarToken(id_restaurante, token, expira_em);
 
+    //O link enviado no email de recuperação
     const linkRecuperacao = `https://menunet.onrender.com/layout/newpassword/${token}`;
 
     await sendRecoveryEmail(email, linkRecuperacao, nome_restaurante);

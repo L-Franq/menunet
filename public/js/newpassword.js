@@ -36,23 +36,29 @@ const alertaDoSistema = function (title, text, icon) {
 const recuperarSenha = async () => {
   const tokenUrl = window.location.pathname.split("/").pop();
   if (!tokenUrl) {
-    alertaDoSistemaErro("Falha", "Falha token de recuperacao nao encontrado na URL!", "error");
+    alertaDoSistemaErro(
+      "Falha",
+      "Token de recuperação não encontrado na URL!",
+      "error",
+    );
     return;
   }
 
   const senha = document.getElementById("senha").value;
   const confirmSenha = document.getElementById("confirmSenha");
 
-  confirmSenha.addEventListener("input", () => {
-    const confirmValue = confirmSenha.value;
-    if(senha !== confirmValue){
+  confirmSenha.addEventListener("input", (e) => {
+    if (senha !== e.target.value) {
       erro.classList.remove("hidden");
       erro.innerText = "As senhas sao diferentes!";
     }
+  });
+  confirmSenha.addEventListener("change", () => {
     erro.innerText = "";
     erro.classList.add("hidden");
   });
 
+  //Dados para recuperação de password
   const dadosParaEnviar = {
     token: tokenUrl,
     senha: senha,
@@ -77,7 +83,7 @@ const recuperarSenha = async () => {
         "success",
       );
 
-      setTimeout(()=> window.location.href = "/layout/login", 2000);
+      setTimeout(() => (window.location.href = "/layout/login"), 2000);
     } else {
       const errorMessage = dadosServer.erro;
       erro.classList.remove("hidden");

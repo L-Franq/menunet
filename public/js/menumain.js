@@ -55,8 +55,7 @@ async function generateDishes() {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
-  copyRight.innerHTML = `&copy; ${ano} Todos os direitos reservados | Criado por
-        <strong>Lopo Franqueira</strong>`;
+  copyRight.innerHTML = `&copy; Copyright ${ano} Todos os direitos reservados | <strong>Lopo Franqueira</strong>`;
 
   pratosContainer.innerHTML = `<div class="card-item animate__animated animate__zoomIn">
           <div class="card-info">
