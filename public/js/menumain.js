@@ -9,49 +9,58 @@ const filtrosContainer = document.getElementById("filtros");*/
 async function generateDishes() {
   const caminhos = window.location.pathname.split("/");
   const slug = caminhos[caminhos.length - 1];
+
   try {
     const response = await fetch(`/menunet/dados/${slug}`, {
       method: "GET",
     });
 
     const dadosServer = await response.json();
-    console.log(dadosServer.mensagem.imagem);
-
+    
     if (response.ok) {
-      pratosContainer.innerHTML = "";
-      const pathArray = prato.imagem.split("/");
-      const file = pathArray[pathArray.length - 1];
-      const imgSrc = "uploads" + `/${file}`;
-
       const listaDePratos = Array.isArray(dadosServer)
         ? dadosServer
         : dadosServer.mensagem;
+
+      pratosContainer.innerHTML = "";
+
       listaDePratos.forEach((prato) => {
+        // 1. Normaliza as barras (muda '\' para '/')
+        let caminhoImagem = prato.imagem ? prato.imagem.replace(/\\/g, "/") : "";
+
+        // 2. Extrai apenas a parte relativa se for um caminho absoluto do servidor (ex: Render)
+        if (caminhoImagem.includes("uploads/")) {
+          caminhoImagem = "uploads/" + caminhoImagem.split("uploads/")[1];
+        }
+
+        // 3. Garante que começa sem barra dupla
+        caminhoImagem = caminhoImagem.startsWith("/") ? caminhoImagem : `/${caminhoImagem}`;
+
         pratosContainer.innerHTML += `
-            <div class="card-item animate__animated animate__zoomIn">
-          <img src="/${imgSrc}" alt="um prato de ${prato.nome}" />
-          <div class="card-info">
-            <h3 class="nome">${prato.nome}</h3>
-            <p class="price">${prato.preco}KZ</p>
+          <div class="card-item animate__animated animate__zoomIn">
+            <img src="${caminhoImagem}" alt="Um prato de ${prato.nome}" />
+            <div class="card-info">
+              <h3 class="nome">${prato.nome}</h3>
+              <p class="price">${prato.preco} KZ</p>
+            </div>
           </div>
-        </div>
-            `;
+        `;
       });
     } else {
       const erro = dadosServer.erro;
       const preco = "0.00";
 
       pratosContainer.innerHTML = `
-      <div class="card-item animate__animated animate__zoomIn">
+        <div class="card-item animate__animated animate__zoomIn">
           <div class="card-info">
             <h3>${erro}</h3>
             <p class="price">${preco} Kz</p>
           </div>
         </div>
-            `;
+      `;
     }
   } catch (error) {
-    console.error("Falha na requisicao: ", error);
+    console.error("Falha na requisição: ", error);
   }
 }
 

@@ -12,7 +12,7 @@ const db = new Pool({
 });
 
 /*Local PostgreSQL Config
-/*Comment the config above and use this one to run on your machine
+Comment the config above and use this one to run on your machine
 const db = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
