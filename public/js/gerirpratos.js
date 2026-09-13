@@ -78,7 +78,7 @@ async function dadosPrato(id) {
         caminhoImagem = caminhoImagem.startsWith("/") ? caminhoImagem : `/${caminhoImagem}`;
 
 
-      imagemPreview.setAttribute("src", `/${caminhoImagem}`);
+      imagemPreview.setAttribute("src", `${caminhoImagem}`);
       nome.value = `${dadosPrato.nome}`;
       preco.value = `${dadosPrato.preco}`;
       descricao.value = `${dadosPrato.descricao}`;
