@@ -37,7 +37,7 @@ async function generateDishes() {
         caminhoImagem = caminhoImagem.startsWith("/") ? caminhoImagem : `/${caminhoImagem}`;
 
         pratosContainer.innerHTML += `
-          <div class="card-item animate__animated animate__zoomIn">
+          <div title="${prato.descricao}" class="card-item animate__animated animate__zoomIn">
             <img src="${caminhoImagem}" alt="Um prato de ${prato.nome}" />
             <div class="card-info">
               <h3 class="nome">${prato.nome}</h3>
