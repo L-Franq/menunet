@@ -138,16 +138,20 @@ const naEdicao = async () => {
         </div>`;
       }
       listaDePratos.forEach((prato) => {
-        const pathArray = prato.imagem.split("/");
-        const file = pathArray[pathArray.length - 1];
-        const imgSrc = "uploads" + `/${file}`;
+        let caminhoImagem = prato.imagem ? prato.imagem.replace(/\\/g, "/") : "";
+
+        if (caminhoImagem.includes("uploads/")) {
+          caminhoImagem = "uploads/" + caminhoImagem.split("uploads/")[1];
+        }
+
+        caminhoImagem = caminhoImagem.startsWith("/") ? caminhoImagem : `/${caminhoImagem}`;
 
         const dataFormatada = new Date(prato.created_at).toLocaleDateString(
           "pt",
         );
         pratosContainer.innerHTML += `
             <div title="${prato.descricao}" class="history-card" id="card-${prato.id_prato}">
-            <img src="/${imgSrc}" alt="${prato.nome}">
+            <img src="${caminhoImagem}" alt="${prato.nome}">
             <div class="history-info">
                 <h4>${prato.nome}</h4>
                 <p>Última vez: ${dataFormatada}</p>

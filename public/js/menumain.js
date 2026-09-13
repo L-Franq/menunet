@@ -25,15 +25,12 @@ async function generateDishes() {
       pratosContainer.innerHTML = "";
 
       listaDePratos.forEach((prato) => {
-        // 1. Normaliza as barras (muda '\' para '/')
         let caminhoImagem = prato.imagem ? prato.imagem.replace(/\\/g, "/") : "";
 
-        // 2. Extrai apenas a parte relativa se for um caminho absoluto do servidor (ex: Render)
         if (caminhoImagem.includes("uploads/")) {
           caminhoImagem = "uploads/" + caminhoImagem.split("uploads/")[1];
         }
 
-        // 3. Garante que começa sem barra dupla
         caminhoImagem = caminhoImagem.startsWith("/") ? caminhoImagem : `/${caminhoImagem}`;
 
         pratosContainer.innerHTML += `
