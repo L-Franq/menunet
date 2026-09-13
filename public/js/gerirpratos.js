@@ -69,7 +69,16 @@ async function dadosPrato(id) {
     const dadosPrato = dadosServer.mensagem;
 
     if (response.ok) {
-      imagemPreview.setAttribute("src", `/${dadosPrato.imagem}`);
+      let caminhoImagem = dadosPrato.imagem ? dadosPrato.imagem.replace(/\\/g, "/") : "";
+
+        if (caminhoImagem.includes("uploads/")) {
+          caminhoImagem = "uploads/" + caminhoImagem.split("uploads/")[1];
+        }
+
+        caminhoImagem = caminhoImagem.startsWith("/") ? caminhoImagem : `/${caminhoImagem}`;
+
+
+      imagemPreview.setAttribute("src", `/${caminhoImagem}`);
       nome.value = `${dadosPrato.nome}`;
       preco.value = `${dadosPrato.preco}`;
       descricao.value = `${dadosPrato.descricao}`;
@@ -151,7 +160,7 @@ const naEdicao = async () => {
         );
         pratosContainer.innerHTML += `
             <div title="${prato.descricao}" class="history-card" id="card-${prato.id_prato}">
-            <img src="${caminhoImagem}" alt="${prato.nome}">
+            <img src="/${caminhoImagem}" alt="${prato.nome}">
             <div class="history-info">
                 <h4>${prato.nome}</h4>
                 <p>Última vez: ${dataFormatada}</p>
