@@ -160,7 +160,7 @@ const naEdicao = async () => {
         );
         pratosContainer.innerHTML += `
             <div title="${prato.descricao}" class="history-card" id="card-${prato.id_prato}">
-            <img src="/${caminhoImagem}" alt="${prato.nome}">
+            <img src="${caminhoImagem}" alt="${prato.nome}">
             <div class="history-info">
                 <h4>${prato.nome}</h4>
                 <p>Última vez: ${dataFormatada}</p>
