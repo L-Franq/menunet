@@ -15,6 +15,7 @@ async function generateDishes() {
     });
 
     const dadosServer = await response.json();
+    console.log(dadosServer.mensagem.imagem);
 
     if (response.ok) {
       pratosContainer.innerHTML = "";

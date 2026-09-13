@@ -21,11 +21,24 @@ const alertaDoSistema = function (title, text, icon) {
 const senha = document.getElementById("senha");
 const senhaConfirm = document.getElementById("senhaConfirm");
 
-senha.addEventListener("input", (e) => {
+senha.addEventListener("change", (e) => {
   if (e.target.value.length < 8) {
     erroElement.classList.remove("hidden");
     erroElement.innerText = "Senha muito curta. Mínimo 8 caracteres!";
+    return;
   }
+   erroElement.innerText = "";
+  erroElement.classList.remove("hidden");
+});
+
+senhaConfirm.addEventListener("change", (e)=>{
+  if(e.target.value !== senha.value){
+    erroElement.classList.remove("hidden");
+    erroElement.innerText = "As senhas devem ser parecidas!";
+    return;
+  }
+  erroElement.innerText = "";
+  erroElement.classList.remove("hidden");
 });
 
 formCadastro.addEventListener("submit", async (e) => {

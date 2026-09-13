@@ -146,7 +146,7 @@ const naEdicao = async () => {
           "pt",
         );
         pratosContainer.innerHTML += `
-            <div class="history-card" id="card-${prato.id_prato}">
+            <div title="${prato.descricao}" class="history-card" id="card-${prato.id_prato}">
             <img src="/${imgSrc}" alt="${prato.nome}">
             <div class="history-info">
                 <h4>${prato.nome}</h4>
