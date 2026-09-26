@@ -342,6 +342,22 @@ document.addEventListener("DOMContentLoaded", async () => {
           correctLevel: QRCode.CorrectLevel.H,
         });
 
+        const btncopy = document.getElementById("btncopy");
+        const campo = document.getElementById("campo");
+        const feedback = document.getElementById("feedback");
+        campo.setAttribute("value", `https://menunet.onrender.com/layout/menunet/${slug}`)
+
+        btncopy.addEventListener("click", async()=>{
+            try {
+                await navigator.clipboard.writeText(campo.value);
+                feedback.textContent = "Link compiado!"
+                setTimeout(()=>{feedback.textContent = "";}, 2000);
+            } catch (error) {
+                feedback.textContent = "Falha ao copiar!"
+                console.error(error)
+            }
+        })
+
         document
           .getElementById("btn-baixar-qr")
           .addEventListener("click", () => {

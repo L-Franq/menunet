@@ -13,7 +13,8 @@
   font-family: "Poppins", sans-serif;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
@@ -127,7 +128,7 @@ main,
 /* --- LAYOUT LADO A LADO (MENU E PERFIL) --- */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; 
+  grid-template-columns: 1fr 1fr;
   gap: 30px;
   align-items: start;
   width: 100%;
@@ -308,6 +309,41 @@ textarea:focus {
   object-fit: cover;
 }
 
+/* Copiar e Colar*/
+#cop-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#campo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin: 4px;
+}
+
+#campo-container span {
+  border: 1px solid #888;
+  padding: 8px;
+  border-radius: 2px;
+  margin: 1px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#campo-container input {
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+  outline: none;
+  border: 1px solid #888;
+  border-radius: 2px;
+  padding: 8px;
+}
+
 /* --- QR CODE --- */
 #Qr-container {
   margin-left: var(--sidebar-width);
@@ -360,7 +396,7 @@ textarea:focus {
 /* --- RESPONSIVIDADE (Apenas telas menores/mobiles) --- */
 @media (max-width: 1024px) {
   .dashboard-grid {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 }
 
@@ -395,5 +431,4 @@ textarea:focus {
     padding: 8px 15px;
     font-size: 0.9rem;
   }
-
 }

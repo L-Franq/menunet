@@ -7,7 +7,7 @@
 
 # Sobre o Sistema 
 
-Para a utilização do sistema não são requeridas instalação de quaisquer ferramentas por parte do usuário, ou conhecimentos profundos em tecnologia. O sistema tem uma interface simples e fluxo de utilização claro, o que faz do *MenuNet* um sistema flexível e moderno.
+Para a utilização do sistema não são requeridas instalação de quaisquer ferramentas por parte do usuário, ou conhecimentos prévios em tecnologia. O sistema tem uma interface simples e fluxo de utilização claro, o que faz do *MenuNet* um sistema flexível e moderno.
 
 Com o sistema é possível:
 
@@ -19,10 +19,11 @@ Com o sistema é possível:
 - No menu, o cliente pode filtrar a busca por intervalos de preços, bem como categorias (comida, bebida).
 
 
-O sistema está completo, mas com uma visão de crescimento gradual conforme a necessidade do negócio. Tanto em termos de infra-estrutura como nas tecnologias utilizadas.
+O sistema é um MVP completo, mas com uma visão de crescimento gradual conforme a necessidade do negócio. Tanto em termos de infraestrutura como nas tecnologias utilizadas.
 
 # Funcionalidades em Potencial
 
+-Sistema de pagamento de subscrição integrado;
 - Marcação de pedidos por mesa;
 - controlo de seleção Takeaway;
 - Relatórios de demanda.
