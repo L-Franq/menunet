@@ -366,29 +366,53 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         document
           .getElementById("btn-baixar-qr")
-          .addEventListener("click", async () => {
+          .addEventListener("click", () => {
             const imgQrCode = container.querySelector("img");
 
-            if (imgQrCode) {
+            if (imgQrCode && imgQrCode.src) {
               try {
-                // Fetch the image source (works for Data URLs, Blobs, and standard URLs)
-                const response = await fetch(imgQrCode.src);
-                const blob = await response.blob();
+                const imgSrc = imgQrCode.src;
 
-                const blobUrl = URL.createObjectURL(blob);
+                // Se for Data URL (Base64)
+                if (imgSrc.startsWith("data:image")) {
+                  // 1. Separa o cabeçalho dos dados em base64
+                  const parts = imgSrc.split(",");
+                  const mime = parts[0].match(/:(.*?);/)[1];
+                  const bstr = atob(parts[1]);
+                  let n = bstr.length;
+                  const u8arr = new Uint8Array(n);
 
-                const linkBaixar = document.createElement("a");
-                linkBaixar.href = blobUrl;
-                linkBaixar.download = `qrcode-${slug}.png`;
+                  while (n--) {
+                    u8arr[n] = bstr.charCodeAt(n);
+                  }
 
-                // Append to body is required for some mobile browsers to trigger properly
-                document.body.appendChild(linkBaixar);
-                linkBaixar.click();
+                  // 2. Cria o Blob binário
+                  const blob = new Blob([u8arr], { type: mime });
+                  const blobUrl = URL.createObjectURL(blob);
 
-                document.body.removeChild(linkBaixar);
-                URL.revokeObjectURL(blobUrl);
-              } catch (error) {
-                console.error("Erro ao baixar o QR Code:", error);
+                  // 3. Executa o download
+                  const linkBaixar = document.createElement("a");
+                  linkBaixar.href = blobUrl;
+                  linkBaixar.download = `qrcode-${slug}.png`;
+
+                  document.body.appendChild(linkBaixar);
+                  linkBaixar.click();
+                  document.body.removeChild(linkBaixar);
+
+                  // Limpa a memória
+                  setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+                } else {
+                  // Caso seja uma URL normal (https://...)
+                  const linkBaixar = document.createElement("a");
+                  linkBaixar.href = imgSrc;
+                  linkBaixar.download = `qrcode-${slug}.png`;
+                  linkBaixar.target = "_blank";
+                  document.body.appendChild(linkBaixar);
+                  linkBaixar.click();
+                  document.body.removeChild(linkBaixar);
+                }
+              } catch (err) {
+                console.error("Erro ao baixar o QR Code:", err);
               }
             }
           });
