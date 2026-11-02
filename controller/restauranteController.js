@@ -2,26 +2,26 @@ const modelRestaurante = require("../model/restauranteModel");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { ZodError } = require("zod");
-const { registerSchema } = require("../schemas/registerSchema");
+const { registerSchema } = require("../schemas/restauranteRegisterSchema");
 const { loginSchema } = require("../schemas/loginSchema");
 
 const register = async function (req, res) {
-   const data = registerSchema.parse(req.body);
+   const reqBodyData = registerSchema.parse(req.body);
 
   try {
-    const verificar = await modelRestaurante.verificarEmail(data.email);
+    const isAlreadyRegistered = await modelRestaurante.verificarEmail(reqBodyData.email);
 
-    if (verificar) {
+    if (isAlreadyRegistered) {
       return res.status(400).json({ erro: "Email já cadastrado!" });
     }
 
-    const senhaHashed = await bcrypt.hash(data.senha, 10);
+    const senhaHashed = await bcrypt.hash(reqBodyData.senha, 10);
 
     const restaurante = await modelRestaurante.registrar(
-      data.nome,
-      data.email,
+      reqBodyData.nome,
+      reqBodyData.email,
       senhaHashed,
-      data.slug,
+      reqBodyData.slug,
     );
 
     if (restaurante) {
@@ -41,25 +41,25 @@ const register = async function (req, res) {
 };
 
 const login = async function (req, res) {
-  const data = loginSchema.parse(req.body);
+  const reqBodyData = loginSchema.parse(req.body);
 
   try {
-    const result = await modelRestaurante.login(data.email);
+    const restauranteIn = await modelRestaurante.login(reqBodyData.email);
 
-    if (!result) {
+    if (!restauranteIn) {
       return res.status(401).json({ erro: "Email ou senha incorretos!" });
     }
 
-    const senhaCorreta = await bcrypt.compare(data.senha, result.senha);
+    const senhaCorreta = await bcrypt.compare(reqBodyData.senha, restauranteIn.senha);
 
     if (!senhaCorreta) {
       return res.status(401).json({ erro: "Email ou senha incorretos!" });
     }
 
     const payload = {
-      id: result.id_restaurante,
-      slug: result.slug,
-      email: result.email,
+      id: restauranteIn.id_restaurante,
+      slug: restauranteIn.slug,
+      email: restauranteIn.email,
     };
 
     const token = jwt.sign(payload, process.env.SECRET_KEY, {
@@ -83,17 +83,17 @@ const login = async function (req, res) {
   }
 };
 
-const dadosrestaurantes = async function (req, res) {
+const MostarDadosrestaurantes = async function (req, res) {
   try {
-    const result = await modelRestaurante.buscarDadosRestaurantes(req.id_restaurante);
+    const dadosRestauranteIn = await modelRestaurante.buscarDadosRestaurantes(req.id_restaurante);
 
-    if (!result) {
+    if (!dadosRestauranteIn) {
       return res.status(400).json({ erro: "Falha ao buscar os dados." });
     }
 
     return res
       .status(200)
-      .json({ mensagem: `Bem-vindo ${result.nome}`, restaurante: result });
+      .json({ mensagem: `Bem-vindo ${dadosRestauranteIn.nome}`, restaurante: dadosRestauranteIn });
   } catch (error) {
     console.error("Falha ao buscar dados do restaurante: ", error);
     return res
@@ -102,4 +102,4 @@ const dadosrestaurantes = async function (req, res) {
   }
 };
 
-module.exports = { register, login, dadosrestaurantes };
+module.exports = { register, login, MostarDadosrestaurantes };

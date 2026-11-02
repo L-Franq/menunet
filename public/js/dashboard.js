@@ -1,4 +1,4 @@
-const novoItem1 = document.getElementById("n2");
+const btnIrHistorico = document.getElementById("n2");
 const main = document.getElementById("pai");
 const imgInput = document.getElementById("imgInput");
 const preview = document.getElementById("preview");
@@ -41,7 +41,7 @@ const alertaDoSistemaErro = function (title, text, icon) {
   });
 };
 
-novoItem1.addEventListener("click", (e) => {
+btnIrHistorico.addEventListener("click", (e) => {
   e.preventDefault();
   window.location.href = "/layout/historico";
 });
@@ -51,7 +51,7 @@ function renderizarMiniCard(prato, url) {
   const card = document.createElement("div");
   card.className = "mini-card";
   card.innerHTML = `
-        <img src="${url}" alt="Prato">
+        <img src="${url}" alt="${prato.nome}">
         <div class="mini-card-info">
             <h4>${prato.nome}</h4>
             <span>${prato.preco} Kz</span>
@@ -184,16 +184,17 @@ document.addEventListener("DOMContentLoaded", async () => {
       nome.innerText = dadosServer.restaurante.nome;
     }
 
-    const perfil = document.getElementById("perfil1");
+    const btnEditarPerfil = document.getElementById("perfil1");
 
-    if (perfil) {
-      perfil.addEventListener("click", (e) => {
+    if (btnEditarPerfil) {
+      btnEditarPerfil.addEventListener("click", (e) => {
         e.preventDefault();
         QrContainer.classList.add("hidden");
         perfilSettings.classList.remove("hidden");
         main.classList.add("hidden");
 
-        document.getElementById("slug").value = `${dadosServer.restaurante.slug}`;
+        document.getElementById("slug").value =
+          `${dadosServer.restaurante.slug}`;
         document.getElementById("nomeSettings").value =
           `${dadosServer.restaurante.nome}`;
         document.getElementById("senhaSettings").value =
@@ -235,10 +236,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
-    const novoItem = document.getElementById("n1");
+    const btnAdicionarPratos = document.getElementById("n1");
 
-    if (novoItem) {
-      novoItem.addEventListener("click", (e) => {
+    if (btnAdicionarPratos) {
+      btnAdicionarPratos.addEventListener("click", (e) => {
         e.preventDefault();
         QrContainer.classList.add("hidden");
         perfilSettings.classList.add("hidden");
@@ -272,15 +273,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "info",
               );
 
-              const priceRegex = price.match(/\d+(\.\d+)?/);
-              if(priceRegex === null)
-                return alertaDoSistema(
+            const priceRegex = price.match(/\d+(\.\d+)?/);
+            if (priceRegex === null)
+              return alertaDoSistema(
                 "* * *",
                 "Preço inválido! Evite vírgula(0,00). Para cêntavos use ponto(0.00).",
                 "info",
               );
 
-              const priceConvert = parseFloat(price);
+            const priceConvert = parseFloat(price);
 
             const pratoObjeto = {
               id: Date.now(),
@@ -343,31 +344,52 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         const btncopy = document.getElementById("btncopy");
-        const campo = document.getElementById("campo");
+        const urlInput = document.getElementById("campo");
         const feedback = document.getElementById("feedback");
-        campo.setAttribute("value", `https://menunet.onrender.com/layout/menunet/${slug}`)
+        campo.setAttribute(
+          "value",
+          `https://menunet.onrender.com/layout/menunet/${slug}`,
+        );
 
-        btncopy.addEventListener("click", async()=>{
-            try {
-                await navigator.clipboard.writeText(campo.value);
-                feedback.textContent = "Link compiado!"
-                setTimeout(()=>{feedback.textContent = "";}, 2000);
-            } catch (error) {
-                feedback.textContent = "Falha ao copiar!"
-                console.error(error)
-            }
-        })
+        btncopy.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(urlInput.value);
+            feedback.textContent = "Link compiado!";
+            setTimeout(() => {
+              feedback.textContent = "";
+            }, 2000);
+          } catch (error) {
+            feedback.textContent = "Falha ao copiar!";
+            console.error(error);
+          }
+        });
 
         document
           .getElementById("btn-baixar-qr")
-          .addEventListener("click", () => {
+          .addEventListener("click", async () => {
             const imgQrCode = container.querySelector("img");
 
             if (imgQrCode) {
-              const linkBaixar = document.createElement("a");
-              linkBaixar.href = imgQrCode.src;
-              linkBaixar.download = `qrcode-${slug}.png`;
-              linkBaixar.click();
+              try {
+                // Fetch the image source (works for Data URLs, Blobs, and standard URLs)
+                const response = await fetch(imgQrCode.src);
+                const blob = await response.blob();
+
+                const blobUrl = URL.createObjectURL(blob);
+
+                const linkBaixar = document.createElement("a");
+                linkBaixar.href = blobUrl;
+                linkBaixar.download = `qrcode-${slug}.png`;
+
+                // Append to body is required for some mobile browsers to trigger properly
+                document.body.appendChild(linkBaixar);
+                linkBaixar.click();
+
+                document.body.removeChild(linkBaixar);
+                URL.revokeObjectURL(blobUrl);
+              } catch (error) {
+                console.error("Erro ao baixar o QR Code:", error);
+              }
             }
           });
       });
@@ -376,10 +398,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const verMenu = document.getElementById("verMenu");
 
     if (verMenu) {
-      verMenu.addEventListener("click", (e)=>{
+      verMenu.addEventListener("click", (e) => {
         e.preventDefault();
         window.location.href = "/layout/gerirpratos";
-      })
+      });
     }
   } catch (error) {
     console.error("Falha ao requerer os dados: ", error);

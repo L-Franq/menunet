@@ -1,13 +1,13 @@
-const pratosModel = require("../model/pratosModel");
+const pratosModel = require("../model/pratosManagementModel");
 
 const dadosPrato = async (req, res) => {
-  const id_prato = req.params.id;
+  const idPrato = req.params.id;
   try {
-    if (id_prato === undefined || id_prato === null) {
+    if (idPrato === undefined || idPrato === null) {
       return res.status(400).json({ erro: "Prato sem identificador." });
     }
 
-    const pratoInfo = await pratosModel.buscarPratoInfo(id_prato);
+    const pratoInfo = await pratosModel.buscarPratoInfo(idPrato);
 
     if (!pratoInfo) {
       return res.status(404).json({ erro: "Informações do prato em falta." });

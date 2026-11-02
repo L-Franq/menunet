@@ -1,9 +1,10 @@
-const pratosModel = require("../model/pratosModel");
-const { pratoSchema } = require("../schemas/pratoSchema");
+const pratosModel = require("../model/pratosManagementModel");
+const { pratoCadastroSchema } = require("../schemas/pratoRegisterSchema");
 const { ZodError } = require("zod");
 
 const registroPrato = async function (req, res) {
-  const data = pratoSchema.parse(req.body);
+  const reqBodyData = pratoCadastroSchema.parse(req.body);
+  const imageSizeLimit = 2 * 1024 * 1024;
   
   try {
     if (!req.id_restaurante) {
@@ -14,15 +15,18 @@ const registroPrato = async function (req, res) {
       return res.status(400).json({ erro: "Imagem do prato em falta. É obrigatória!" });
     }
 
-    //const size = 2 * 1024 * 1024;
+    if(req.file.size > imageSizeLimit){
+      return res.status(400).json({erro: "Imagem fora do limite! Só imagens iguais ou inferiores a 2MB."});
+    }
+
     const imagemPath = req.file.path;
 
     const registerPrato = await pratosModel.registerPrato(
       req.id_restaurante,
-      data.nome,
-      data.descricao,
-      data.preco,
-      data.categoria,
+      reqBodyData.nome,
+      reqBodyData.descricao,
+      reqBodyData.preco,
+      reqBodyData.categoria,
       imagemPath,
     );
 

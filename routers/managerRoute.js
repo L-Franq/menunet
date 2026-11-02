@@ -1,20 +1,20 @@
 const router = require("./Route");
 const { authMiddleware } = require("../middlewares/authMiddleware");
-const controller = require("../controller/restauranteController");
-const infoSettings = require("../controller/restauranteSettingsController");
+const accessRestauranteController = require("../controller/restauranteController");
+const restauranteConfigController = require("../controller/restauranteConfigController");
 const { uploads } = require("../services/multerService");
 const pratoController = require("../controller/pratoController");
 const historicoController = require("../controller/historicoController");
 const gerirPratoController = require("../controller/gestaoPratoController");
 const { recoveryEmailVerif } = require("../controller/recoverEmailController");
 
-router.get("/dadosrestaurantes", authMiddleware, controller.dadosrestaurantes);
-router.post("/registro", controller.register);
-router.post("/login", controller.login);
-router.put("/upt/dadosrestaurantes", authMiddleware, infoSettings.update);
-router.put("/upt/restaurantessenha", authMiddleware, infoSettings.senhaUpdate);
+router.get("/dadosrestaurantes", authMiddleware, accessRestauranteController.MostarDadosrestaurantes);
+router.post("/registro", accessRestauranteController.register);
+router.post("/login", accessRestauranteController.login);
+router.put("/upt/dadosrestaurantes", authMiddleware, restauranteConfigController.atualizarInfoRestaurante);
+router.put("/upt/restaurantessenha", authMiddleware, restauranteConfigController.atualizarSenhaRestaurante);
 router.post("/esqueci-senha", recoveryEmailVerif);
-router.put("/rec/password", infoSettings.UpdateSenhaRecover);
+router.put("/rec/password", restauranteConfigController.atualizarSenhaEmRecuperacao);
 
 /*Pratos routes*/
 router.post(

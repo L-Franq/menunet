@@ -1,4 +1,4 @@
-const pratosModel = require("../model/pratosModel");
+const pratosModel = require("../model/pratosManagementModel");
 
 const pratosNoHistorico = async (req, res) => {
   try {
@@ -42,7 +42,7 @@ const eliminarPrato = async (req, res) => {
     if (prato === 0) {
       return res.status(400).json({ erro: "Falha ao deletar prato." });
     }
-    return res.status(200).json({ mensagem: "Deletado!" });
+    return res.status(200).json({ mensagem: "Eliminado!" });
   } catch (error) {
     console.error("Falha para eliminar prato: ", error);
     return res.status(500).json({ erro: "Erro na conexão. Tente mais tarde!" });

@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 9000; 
 const path = require("path");
@@ -10,6 +11,9 @@ app.use("/uploads", express.static(uploadDir));
 app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({
+  origin: "http://localhost:5173"
+}));
 
 require("./databases/db");
 require("./databases/init");

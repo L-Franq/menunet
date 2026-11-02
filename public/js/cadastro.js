@@ -75,7 +75,6 @@ async function cadastro(dadosCadastro) {
       erroElement.innerText = dadosServer.erro || "Falha ao cadastrar!";
     }
   } catch (error) {
-    console.error("Falha na requisicao: ", error);
     erroElement.classList.remove("hidden");
     erroElement.innerText = "Não foi possível conectar ao servidor!";
   }

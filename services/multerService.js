@@ -20,10 +20,13 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
+  const imageSizeLimit = 2 * 1024 * 1024;
   const allowedMimes = ["image/jpeg", "image/jpg", "image/png", "image/gif"];
   if (allowedMimes.includes(file.mimetype)) {
     cb(null, true);
-  } else {
+  }else if(file.size > imageSizeLimit){
+    cb(new Error("Imagem fora do limite! Só imagens iguais ou inferiores a 2MB."));
+  }else {
     cb(new Error("Apenas imagens sao permitidas. tipo de arquivo invalido!"));
   }
 };

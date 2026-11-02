@@ -1,5 +1,5 @@
 const modelRestaurante = require("../model/restauranteModel");
-const atualizarDados = require("../model/atulizarRestauranteModel");
+const atualizarDados = require("../model/atulizarRestauranteInfoModel");
 const tokenModel = require("../model/tokenModel");
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
@@ -11,23 +11,23 @@ const recoveryEmailVerif = async (req, res) => {
   try {
     const emailOnSystem = await modelRestaurante.verificarEmail(email);
     if (!emailOnSystem) {
-      return res.status(400).json({ erro: "Email incorreto." });
+      return res.status(400).json({ erro: "Usuário não encontrado. Verifique o email!" });
     }
 
     const restaurante = await modelRestaurante.login(email);
-    const nome_restaurante = restaurante.nome;
-    const id_restaurante = restaurante.id_restaurante;
+    const nomeRestaurante = restaurante.nome;
+    const idRestaurante = restaurante.id_restaurante;
 
     const token = crypto.randomBytes(20).toString("hex");
-    const expira_em = new Date();
-    expira_em.setHours(expira_em.getHours() + 1);
+    const expiraEm = new Date();
+    expiraEm.setHours(expiraEm.getHours() + 1);
 
-    await tokenModel.registrarToken(id_restaurante, token, expira_em);
+    await tokenModel.registrarToken(idRestaurante, token, expiraEm);
 
     //O link enviado no email de recuperação
     const linkRecuperacao = `https://menunet.onrender.com/layout/newpassword/${token}`;
 
-    await sendRecoveryEmail(email, linkRecuperacao, nome_restaurante);
+    await sendRecoveryEmail(email, linkRecuperacao, nomeRestaurante);
 
     return res.status(200).json({
       mensagem:
@@ -55,15 +55,15 @@ const recuperarSenha = async (req, res) => {
       res.status(400).json({erro: "Link de recuperação expirado. Solicite um novo."});
     }
 
-    const id_restaurante = tokenValido.id_restaurante;
+    const idRestaurante = tokenValido.id_restaurante;
     const senhaHashed = await bcrypt.hash(senha, 10);
     
-    const valorAtuallizado = await atualizarDados.atualizarSenha(
+    const updatedPassword = await atualizarDados.atualizarSenha(
       senhaHashed,
-      id_restaurante,
+      idRestaurante,
     );
 
-    if (valorAtuallizado == null) {
+    if (updatedPassword == null) {
       return res.status(400).json({erro: "Falha ao atualizar senha!"});
     }
     

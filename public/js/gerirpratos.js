@@ -16,8 +16,6 @@ const alertaDoSistema = function (title, text, icon) {
     showConfirmButton: false,
     timer: 750,
     timerProgressBar: true,
-
-    //ajustes para o sistema
     background: "#f4f9f9",
     color: "#035373",
     width: "400px",
@@ -32,8 +30,6 @@ const alertaDoSistemaErro = function (title, text, icon) {
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
-
-    //ajustes para o sistema
     background: "#f4f9f9",
     color: "#035373",
     width: "400px",
