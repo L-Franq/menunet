@@ -370,49 +370,37 @@ document.addEventListener("DOMContentLoaded", async () => {
             const imgQrCode = container.querySelector("img");
 
             if (imgQrCode && imgQrCode.src) {
-              try {
-                const imgSrc = imgQrCode.src;
+              // Detecta se é telemóvel/tablet
+              const isMobile =
+                /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                  navigator.userAgent,
+                );
 
-                // Se for Data URL (Base64)
-                if (imgSrc.startsWith("data:image")) {
-                  // 1. Separa o cabeçalho dos dados em base64
-                  const parts = imgSrc.split(",");
-                  const mime = parts[0].match(/:(.*?);/)[1];
-                  const bstr = atob(parts[1]);
-                  let n = bstr.length;
-                  const u8arr = new Uint8Array(n);
-
-                  while (n--) {
-                    u8arr[n] = bstr.charCodeAt(n);
-                  }
-
-                  // 2. Cria o Blob binário
-                  const blob = new Blob([u8arr], { type: mime });
-                  const blobUrl = URL.createObjectURL(blob);
-
-                  // 3. Executa o download
-                  const linkBaixar = document.createElement("a");
-                  linkBaixar.href = blobUrl;
-                  linkBaixar.download = `qrcode-${slug}.png`;
-
-                  document.body.appendChild(linkBaixar);
-                  linkBaixar.click();
-                  document.body.removeChild(linkBaixar);
-
-                  // Limpa a memória
-                  setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+              if (isMobile) {
+                const novaAba = window.open();
+                if (novaAba) {
+                  novaAba.document.write(`
+            <html>
+              <head><title>Guardar QR Code</title></head>
+              <body style="margin:0; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f0f0f0; font-family:sans-serif;">
+                <p style="margin-bottom: 20px; color: #333; font-size: 16px; text-align: center;">Mantenha o dedo premido na imagem abaixo e escolha <b>"Descarregar imagem"</b>:</p>
+                <img src="${imgQrCode.src}" style="max-width:80%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+              </body>
+            </html>
+          `);
                 } else {
-                  // Caso seja uma URL normal (https://...)
-                  const linkBaixar = document.createElement("a");
-                  linkBaixar.href = imgSrc;
-                  linkBaixar.download = `qrcode-${slug}.png`;
-                  linkBaixar.target = "_blank";
-                  document.body.appendChild(linkBaixar);
-                  linkBaixar.click();
-                  document.body.removeChild(linkBaixar);
+                  // Fallback caso o navegador bloqueie pop-ups
+                  window.location.href = imgQrCode.src;
                 }
-              } catch (err) {
-                console.error("Erro ao baixar o QR Code:", err);
+              } else {
+                // No PC: O download direto por link funciona perfeitamente
+                const linkBaixar = document.createElement("a");
+                linkBaixar.href = imgQrCode.src;
+                linkBaixar.download = `qrcode-${slug}.png`;
+
+                document.body.appendChild(linkBaixar);
+                linkBaixar.click();
+                document.body.removeChild(linkBaixar);
               }
             }
           });
