@@ -193,8 +193,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         perfilSettings.classList.remove("hidden");
         main.classList.add("hidden");
 
-        document.getElementById("slug").value =
-          `${dadosServer.restaurante.slug}`;
+        document.getElementById("slug").value = `${dadosServer.restaurante.slug}`;
         document.getElementById("nomeSettings").value =
           `${dadosServer.restaurante.nome}`;
         document.getElementById("senhaSettings").value =
@@ -273,15 +272,15 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "info",
               );
 
-            const priceRegex = price.match(/\d+(\.\d+)?/);
-            if (priceRegex === null)
-              return alertaDoSistema(
+              const priceRegex = price.match(/\d+(\.\d+)?/);
+              if(priceRegex === null)
+                return alertaDoSistema(
                 "* * *",
                 "Preço inválido! Evite vírgula(0,00). Para cêntavos use ponto(0.00).",
                 "info",
               );
 
-            const priceConvert = parseFloat(price);
+              const priceConvert = parseFloat(price);
 
             const pratoObjeto = {
               id: Date.now(),
@@ -346,62 +345,30 @@ document.addEventListener("DOMContentLoaded", async () => {
         const btncopy = document.getElementById("btncopy");
         const urlInput = document.getElementById("campo");
         const feedback = document.getElementById("feedback");
-        campo.setAttribute(
-          "value",
-          `https://menunet.onrender.com/layout/menunet/${slug}`,
-        );
+        campo.setAttribute("value", `https://menunet.onrender.com/layout/menunet/${slug}`)
 
-        btncopy.addEventListener("click", async () => {
-          try {
-            await navigator.clipboard.writeText(urlInput.value);
-            feedback.textContent = "Link compiado!";
-            setTimeout(() => {
-              feedback.textContent = "";
-            }, 2000);
-          } catch (error) {
-            feedback.textContent = "Falha ao copiar!";
-            console.error(error);
-          }
-        });
+        btncopy.addEventListener("click", async()=>{
+            try {
+                await navigator.clipboard.writeText(urlInput.value);
+                feedback.textContent = "Link compiado!"
+                setTimeout(()=>{feedback.textContent = "";}, 2000);
+            } catch (error) {
+                feedback.textContent = "Falha ao copiar!"
+                console.error(error)
+            }
+        })
 
         document
           .getElementById("btn-baixar-qr")
           .addEventListener("click", () => {
             const imgQrCode = container.querySelector("img");
 
-            if (imgQrCode && imgQrCode.src) {
-              // Detecta se é telemóvel/tablet
-              const isMobile =
-                /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-                  navigator.userAgent,
-                );
-
-              if (isMobile) {
-                const novaAba = window.open();
-                if (novaAba) {
-                  novaAba.document.write(`
-            <html>
-              <head><title>Guardar QR Code</title></head>
-              <body style="margin:0; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#f0f0f0; font-family:sans-serif;">
-                <p style="margin-bottom: 20px; color: #333; font-size: 16px; text-align: center;">Mantenha o dedo premido na imagem abaixo e escolha <b>"Descarregar imagem"</b>:</p>
-                <img src="${imgQrCode.src}" style="max-width:80%; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
-              </body>
-            </html>
-          `);
-                } else {
-                  // Fallback caso o navegador bloqueie pop-ups
-                  window.location.href = imgQrCode.src;
-                }
-              } else {
-                // No PC: O download direto por link funciona perfeitamente
-                const linkBaixar = document.createElement("a");
-                linkBaixar.href = imgQrCode.src;
-                linkBaixar.download = `qrcode-${slug}.png`;
-
-                document.body.appendChild(linkBaixar);
-                linkBaixar.click();
-                document.body.removeChild(linkBaixar);
-              }
+            if (imgQrCode) {
+              const linkBaixar = document.createElement("a");
+              linkBaixar.href = imgQrCode.src;
+              console.log(linkBaixar)
+              linkBaixar.download = `qrcode-${slug}.png`;
+              linkBaixar.click();
             }
           });
       });
@@ -410,10 +377,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     const verMenu = document.getElementById("verMenu");
 
     if (verMenu) {
-      verMenu.addEventListener("click", (e) => {
+      verMenu.addEventListener("click", (e)=>{
         e.preventDefault();
         window.location.href = "/layout/gerirpratos";
-      });
+      })
     }
   } catch (error) {
     console.error("Falha ao requerer os dados: ", error);
